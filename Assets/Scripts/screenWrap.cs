@@ -23,7 +23,7 @@ public class screenWrap : MonoBehaviour {
     void Update () {
         //ScreenWrap();
 
-        if(gameObject.GetComponent<Image>().transform.localPosition.x < -(Screen.width / 2f ))
+        if(gameObject.GetComponent<Image>().transform.localPosition.x < -(canvas.transform.position.))
         {
             gameObject.GetComponent<Image>().transform.localPosition= Vector2.zero;
         }
