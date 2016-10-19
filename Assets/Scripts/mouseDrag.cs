@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System;
 
-public class mouseDrag : MonoBehaviour, IDragHandler
+public class mouseDrag : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public void OnDrag(PointerEventData eventData)
     {
@@ -12,4 +12,7 @@ public class mouseDrag : MonoBehaviour, IDragHandler
         transform.position = objPosition;
     }
 
+    public virtual void OnEndDrag(PointerEventData eventData) {
+
+    }
 }
