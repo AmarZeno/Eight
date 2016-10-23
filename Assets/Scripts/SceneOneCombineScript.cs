@@ -2,71 +2,39 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
+
 public class SceneOneCombineScript : mouseDrag {
 
-    public GameObject elementContainer;
-    private bool _isLerping = false;
-    private float _timeStartedLerping;
-    public float timeTakenDuringLerp = 3.0f;
-    private Vector2 _startPosition;
-    private Vector2 _endPosition;
 
+    //public float speed;
+    //public Transform target;
 
+    //private Vector3 zAxis = new Vector3(0, 0, 1);
     void FixedUpdate() {
-        if (_isLerping) {
+   // transform.RotateAround(target.position, zAxis, speed);
+}
 
-            float timeSinceStarted = Time.time - _timeStartedLerping;
-            float percentageComplete = timeSinceStarted / timeTakenDuringLerp;
-
-
-            transform.localPosition = Vector2.Lerp(_startPosition, _endPosition, 3.0f);
-
-            if (percentageComplete >= 3.0f) {
-                _isLerping = false;
-            }
-        }
-    }
-
-    void StartLerping()
-    {
-        _isLerping = true;
-        _timeStartedLerping = Time.time;
-
-        _startPosition = transform.position;
-        //  _endPosition = transform.position + Vector3.forward * 5;
-        _endPosition = new Vector2(transform.position.x, transform.position.y - 10);
-    }
-
-
-        void OnTriggerEnter2D(Collider2D other)
-    {
-        //  Combine(other.gameObject);
-        Debug.Log("Damn ittt");
-    }
-
-    void Combine(GameObject element) {
-        elementContainer.transform.localPosition = gameObject.transform.localPosition;
-        gameObject.transform.SetParent(element.transform);
-        element.transform.SetParent(elementContainer.transform);
-
-        //IList<Transform> transforms = new IList<Transform>();
-        
-        //foreach(Transform child in transform) {
-        //    transforms.Add(child);
+    void OnTriggerEnter2D(Collider2D other) {
+        //if (other.GetComponent<CircleCollider2D>().name == "Hydrogen1")
+        //{
+        //    other.GetComponent<HingeJoint2D>().enabled = true;
         //}
-
-        //foreach (Transform child in transforms) {
-        //    child = element;
+        //else if (other.GetComponent<CircleCollider2D>().name == "Hydrogen2")
+        //{
+        //    other.GetComponent<HingeJoint2D>().enabled = true;
+        //}
+        //else if (other.GetComponent<CircleCollider2D>().name == "Oxygen") {
+        //    gameObject.GetComponent<HingeJoint2D>().enabled = true;
         //}
     }
 
     public override void OnEndDrag(PointerEventData eventData) {
         if (gameObject.name == "Hydrogen2")
         {
-
+            // ANimate to show the default electron position state
         }
         else if (gameObject.name == "Oxygen") {
-            StartLerping();
+
         }
     }
 }
