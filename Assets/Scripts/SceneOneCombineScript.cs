@@ -15,17 +15,18 @@ public class SceneOneCombineScript : mouseDrag {
 }
 
     void OnTriggerEnter2D(Collider2D other) {
-        //if (other.GetComponent<CircleCollider2D>().name == "Hydrogen1")
-        //{
-        //    other.GetComponent<HingeJoint2D>().enabled = true;
-        //}
-        //else if (other.GetComponent<CircleCollider2D>().name == "Hydrogen2")
-        //{
-        //    other.GetComponent<HingeJoint2D>().enabled = true;
-        //}
-        //else if (other.GetComponent<CircleCollider2D>().name == "Oxygen") {
-        //    gameObject.GetComponent<HingeJoint2D>().enabled = true;
-        //}
+        if (other.GetComponent<Collider2D>().name == "Hydrogen1")
+        {
+            other.GetComponent<RelativeJoint2D>().enabled = true;
+        }
+        else if (other.GetComponent<Collider2D>().name == "Hydrogen2")
+        {
+            other.GetComponent<RelativeJoint2D>().enabled = true;
+        }
+        else if (other.GetComponent<Collider2D>().name == "Oxygen")
+        {
+            gameObject.GetComponent<RelativeJoint2D>().enabled = true;
+        }
     }
 
     public override void OnEndDrag(PointerEventData eventData) {
