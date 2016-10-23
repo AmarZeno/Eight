@@ -15,17 +15,26 @@ public class SceneOneCombineScript : mouseDrag {
 }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.GetComponent<Collider2D>().name == "Hydrogen1")
+
+        GameObject draggedObject = gameObject;
+        GameObject collidedObject = other.GetComponent<Collider2D>().gameObject;
+
+
+        if (draggedObject.name == "Hydrogen1" && collidedObject.name == "Hydrogen2") {
+
+        } else if (draggedObject.name == "Hydrogen2" && collidedObject.name == "Hydrogen1") {
+
+        } else if (collidedObject.name == "Hydrogen1")
         {
-            other.GetComponent<RelativeJoint2D>().enabled = true;
+            collidedObject.GetComponent<RelativeJoint2D>().enabled = true;
         }
-        else if (other.GetComponent<Collider2D>().name == "Hydrogen2")
+        else if (collidedObject.name == "Hydrogen2")
         {
-            other.GetComponent<RelativeJoint2D>().enabled = true;
+            collidedObject.GetComponent<RelativeJoint2D>().enabled = true;
         }
-        else if (other.GetComponent<Collider2D>().name == "Oxygen")
+        else if (collidedObject.name == "Oxygen")
         {
-            gameObject.GetComponent<RelativeJoint2D>().enabled = true;
+            draggedObject.GetComponent<RelativeJoint2D>().enabled = true;
         }
     }
 
