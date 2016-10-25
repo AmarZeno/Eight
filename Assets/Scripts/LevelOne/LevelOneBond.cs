@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
 
 public class LevelOneBond : mouseDrag {
 
@@ -69,6 +69,10 @@ public class LevelOneBond : mouseDrag {
 
         // Reset draggedAtom
         draggedAtom = null;
+    }
+
+    public void ProceedToNextLevel() {
+        SceneManager.LoadScene(1);
     }
     
 }

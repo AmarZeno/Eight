@@ -152,5 +152,9 @@ public class LevelTwoBond : mouseDrag {
         // Reset draggedAtom
         draggedAtom = null;
     }
+
+    public void Exit() {
+        Application.Quit();
+    }
     
 }
