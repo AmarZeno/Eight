@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 
-public class SceneOneBond : mouseDrag {
+public class LevelOneBond : mouseDrag {
 
     // Constants
     readonly Vector2 hydrogenAtomLinearOffset = new Vector2(0, 11);
