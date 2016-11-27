@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class LevelTwoBond : mouseDrag {
 
     // Constants
-    readonly Vector2 fluorineAtomLinearOffset = new Vector2(0, 14);
+    readonly Vector2 fluorineAtomLinearOffset = new Vector2(0, 19);
 
     // Variables
     public GameObject atomProperties;
@@ -57,6 +57,7 @@ public class LevelTwoBond : mouseDrag {
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
                         isBondingFailed = true;
                         atomPropertiesScript.flourineOneBondState = AtomProperties.AtomBondingState.Failed;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
                         atomPropertiesScript.flourineOneBondState = AtomProperties.AtomBondingState.Successful;
@@ -77,6 +78,7 @@ public class LevelTwoBond : mouseDrag {
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
                         isBondingFailed = true;
                         atomPropertiesScript.flourineTwoBondState = AtomProperties.AtomBondingState.Failed;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
                         atomPropertiesScript.flourineTwoBondState = AtomProperties.AtomBondingState.Successful;
@@ -97,6 +99,7 @@ public class LevelTwoBond : mouseDrag {
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
                         isBondingFailed = true;
                         atomPropertiesScript.flourineThreeBondState = AtomProperties.AtomBondingState.Failed;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
                         atomPropertiesScript.flourineThreeBondState = AtomProperties.AtomBondingState.Successful;
@@ -117,6 +120,7 @@ public class LevelTwoBond : mouseDrag {
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
                         isBondingFailed = true;
                         atomPropertiesScript.flourineFourBondState = AtomProperties.AtomBondingState.Failed;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
                         atomPropertiesScript.flourineFourBondState = AtomProperties.AtomBondingState.Successful;
@@ -153,8 +157,26 @@ public class LevelTwoBond : mouseDrag {
         draggedAtom = null;
     }
 
-    public void Exit() {
-        Application.Quit();
+    public void TriggerShellRotation(GameObject collidedAtom, GameObject draggedAtom)
+    {
+        Transform collidedAtomShellTransform;
+        Transform draggedAtomShellTransform;
+        switch (collidedAtom.name)
+        {
+            case "Fluorine1":
+            case "Fluorine2":
+            case "Fluorine3":
+            case "Fluorine4":
+                collidedAtomShellTransform = collidedAtom.transform.FindChild("Shell").transform;
+                collidedAtomShellTransform.localEulerAngles = new Vector3(collidedAtomShellTransform.localRotation.x, collidedAtomShellTransform.localRotation.y, 0);
+                draggedAtomShellTransform = draggedAtom.transform.FindChild("Shell").transform;
+                draggedAtomShellTransform.localEulerAngles = new Vector3(draggedAtomShellTransform.localRotation.x, draggedAtomShellTransform.localRotation.y, 0);
+                break;
+            case "Carbon":
+                break;
+            default:
+                break;
+        }
     }
-    
+
 }

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelOneBond : mouseDrag {
 
     // Constants
-    readonly Vector2 hydrogenAtomLinearOffset = new Vector2(0, 11);
+    readonly Vector2 hydrogenAtomLinearOffset = new Vector2(0, 15);
 
     // Variables
     private GameObject draggedAtom;
@@ -93,7 +93,6 @@ public class LevelOneBond : mouseDrag {
                 break;
             default:
                 break;
-
         }
     }
 }
