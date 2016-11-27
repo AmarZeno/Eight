@@ -41,6 +41,7 @@ public class LevelOneBond : mouseDrag {
                     {
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomLinearOffset;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
                         isBondingFailed = true;
                     }
                     // Enable bonding joint for colliding with any type of atom
@@ -53,6 +54,7 @@ public class LevelOneBond : mouseDrag {
                     {
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomLinearOffset;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
                         isBondingFailed = true;
                     }
                     // Enable bonding joint for colliding with any type of atom
@@ -74,5 +76,24 @@ public class LevelOneBond : mouseDrag {
     public void ProceedToNextLevel() {
         SceneManager.LoadScene(1);
     }
-    
+
+    public void TriggerShellRotation(GameObject collidedAtom, GameObject draggedAtom) {
+        Transform collidedAtomShellTransform;
+        Transform draggedAtomShellTransform;
+        switch (collidedAtom.name)
+        {
+            case "Hydrogen1":
+            case "Hydrogen2":
+                collidedAtomShellTransform = collidedAtom.transform.FindChild("Shell").transform;
+                collidedAtomShellTransform.localEulerAngles = new Vector3(collidedAtomShellTransform.localRotation.x, collidedAtomShellTransform.localRotation.y, 0);
+                draggedAtomShellTransform = draggedAtom.transform.FindChild("Shell").transform;
+                draggedAtomShellTransform.localEulerAngles = new Vector3(draggedAtomShellTransform.localRotation.x, draggedAtomShellTransform.localRotation.y, 180);
+                break;
+            case "Oxygen":
+                break;
+            default:
+                break;
+
+        }
+    }
 }
