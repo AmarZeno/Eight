@@ -15,11 +15,9 @@ public class LevelTwoBond : MouseDrag {
     private GameObject draggedAtom = null;
     private bool isBondingFailed = false;
     private AtomProperties atomPropertiesScript;
-	private List<AtomProperties.AtomBondingState> fluorineAtomList = new List<AtomProperties.AtomBondingState>();
 
     void Start() {
         atomPropertiesScript = atomProperties.GetComponent<AtomProperties>();
-		AddFlourineAtoms ();
     }
 
     public override void OnDrag(PointerEventData eventData)
@@ -31,13 +29,6 @@ public class LevelTwoBond : MouseDrag {
     void OnTriggerEnter2D(Collider2D other) {
         Bond(other);
     }
-
-	void AddFlourineAtoms(){
-		fluorineAtomList.Add (atomPropertiesScript.flourineOneBondState);
-		fluorineAtomList.Add (atomPropertiesScript.flourineTwoBondState);
-		fluorineAtomList.Add (atomPropertiesScript.flourineThreeBondState);
-		fluorineAtomList.Add (atomPropertiesScript.flourineFourBondState);
-	}
 
     void Bond(Collider2D otherAtomCollider) {
 
@@ -159,16 +150,16 @@ public class LevelTwoBond : MouseDrag {
                 draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                 switch (draggedAtom.name) {
                     case "Fluorine1":
-                        atomPropertiesScript.flourineOneBondState = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates[0] = AtomProperties.AtomBondingState.Successful;
                         break;
                     case "Fluorine2":
-                        atomPropertiesScript.flourineTwoBondState = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates[1] = AtomProperties.AtomBondingState.Successful;
                         break;
                     case "Fluorine3":
-                        atomPropertiesScript.flourineThreeBondState = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates[2] = AtomProperties.AtomBondingState.Successful;
                         break;
                     case "Fluorine4":
-                        atomPropertiesScript.flourineFourBondState = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates[3] = AtomProperties.AtomBondingState.Successful;
                         break;
                     default:
                         break;
