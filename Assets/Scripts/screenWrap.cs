@@ -2,15 +2,15 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class screenWrap : MonoBehaviour {
+public class ScreenWrap : MonoBehaviour {
 
     public Canvas canvas;
 
     void Update () {
-        ScreenWrap();
+        Wrap();
     }
 
-    void ScreenWrap() {
+    void Wrap() {
 
         // Update local position if game object moves beyond the canvas(Also include offset for gameObject centre anchor point)
         // 1) Take the difference of the position that bounced over the boundary

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System;
 
-public class mouseDrag : MonoBehaviour, IDragHandler
+public class MouseDrag : MonoBehaviour, IDragHandler
 {
     public virtual void OnDrag(PointerEventData eventData)
     {
