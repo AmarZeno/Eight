@@ -17,27 +17,27 @@ public class ScreenWrap : MonoBehaviour {
         // 2) Subtract the difference to reposition the object inside the boundary
 
         // Left boundary check
-        if ((gameObject.transform.localPosition.x - gameObject.GetComponent<RectTransform>().rect.width / 2) < -(canvas.GetComponent<RectTransform>().rect.width / 2))
+        if ((gameObject.transform.localPosition.x - (gameObject.GetComponent<RectTransform>().rect.width * gameObject.transform.localScale.x) / 2) < -(canvas.GetComponent<RectTransform>().rect.width / 2))
         {    
-            float difference = (gameObject.transform.localPosition.x - gameObject.GetComponent<RectTransform>().rect.width / 2) - (-canvas.GetComponent<RectTransform>().rect.width / 2);
+            float difference = (gameObject.transform.localPosition.x - (gameObject.GetComponent<RectTransform>().rect.width * gameObject.transform.localScale.x) / 2) - (-canvas.GetComponent<RectTransform>().rect.width / 2);
             transform.localPosition = new Vector2(gameObject.transform.localPosition.x - difference, transform.localPosition.y);
         } 
         // Right Boundary Check
-        else if((gameObject.transform.localPosition.x + gameObject.GetComponent<RectTransform>().rect.width / 2) > canvas.GetComponent<RectTransform>().rect.width / 2)
+        else if((gameObject.transform.localPosition.x + (gameObject.GetComponent<RectTransform>().rect.width * gameObject.transform.localScale.x) / 2) > canvas.GetComponent<RectTransform>().rect.width / 2)
         {
-            float difference = (gameObject.transform.localPosition.x + gameObject.GetComponent<RectTransform>().rect.width / 2) - canvas.GetComponent<RectTransform>().rect.width / 2;
+            float difference = (gameObject.transform.localPosition.x + (gameObject.GetComponent<RectTransform>().rect.width * gameObject.transform.localScale.x) / 2) - canvas.GetComponent<RectTransform>().rect.width / 2;
             transform.localPosition = new Vector2(gameObject.transform.localPosition.x - difference, transform.localPosition.y);
         }
         // Top boundary check
-        else if ((gameObject.transform.localPosition.y + gameObject.GetComponent<RectTransform>().rect.height / 2) > canvas.GetComponent<RectTransform>().rect.height / 2)
+        else if ((gameObject.transform.localPosition.y + (gameObject.GetComponent<RectTransform>().rect.height * gameObject.transform.localScale.y) / 2) > canvas.GetComponent<RectTransform>().rect.height / 2)
         {
-            float difference = (gameObject.transform.localPosition.y + gameObject.GetComponent<RectTransform>().rect.height / 2) - canvas.GetComponent<RectTransform>().rect.height / 2;
+            float difference = (gameObject.transform.localPosition.y + (gameObject.GetComponent<RectTransform>().rect.height * gameObject.transform.localScale.y) / 2) - canvas.GetComponent<RectTransform>().rect.height / 2;
             transform.localPosition = new Vector2(transform.localPosition.x, gameObject.transform.localPosition.y - difference);
         }
         // Bottom boundary check
-        else if ((gameObject.transform.localPosition.y - gameObject.GetComponent<RectTransform>().rect.height / 2) < (-canvas.GetComponent<RectTransform>().rect.height / 2))
+        else if ((gameObject.transform.localPosition.y - (gameObject.GetComponent<RectTransform>().rect.height * gameObject.transform.localScale.y) / 2) < (-canvas.GetComponent<RectTransform>().rect.height / 2))
         {
-            float difference = (gameObject.transform.localPosition.y - gameObject.GetComponent<RectTransform>().rect.height / 2) - (-canvas.GetComponent<RectTransform>().rect.height / 2);
+            float difference = (gameObject.transform.localPosition.y - (gameObject.GetComponent<RectTransform>().rect.height * gameObject.transform.localScale.y) / 2) - (-canvas.GetComponent<RectTransform>().rect.height / 2);
             transform.localPosition = new Vector2(transform.localPosition.x, gameObject.transform.localPosition.y - difference);
         }
 
