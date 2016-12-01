@@ -20,9 +20,9 @@ public class SplitAtoms : MonoBehaviour {
 				hydrogenFour.GetComponent<RelativeJoint2D> ().enabled = false;
 
 				hydrogenTwo.GetComponent<RelativeJoint2D> ().enabled = false;
-
-				hydrogenTwo.transform.position = Input.GetTouch (0).position;
-				hydrogenFour.transform.position = Input.GetTouch (1).position;
+				//TODO update atom properties
+				hydrogenTwo.transform.localPosition = Input.GetTouch (0).position;
+				hydrogenFour.transform.localPosition = Input.GetTouch (1).position;
 			}
 		}
 	}

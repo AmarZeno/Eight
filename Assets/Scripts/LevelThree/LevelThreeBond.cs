@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System;
 
 public class LevelThreeBond : MouseDrag {
-
+	//TODO Replace AtomProperties
     // Constants
     readonly Vector2 fluorineAtomLinearOffset = new Vector2(0, 19);
 
