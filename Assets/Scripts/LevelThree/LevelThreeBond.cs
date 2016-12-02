@@ -32,6 +32,11 @@ public class LevelThreeBond : MouseDrag {
 
     void Bond(Collider2D otherAtomCollider) {
 
+		// Prevent multi touch
+		if (Input.touchCount == 2) {
+			return;
+		}
+
         // Prevent bonding when the user is not dragging an atom and when he makes a wrong bonding
         if (draggedAtom == null || isBondingFailed == true)
             return;
