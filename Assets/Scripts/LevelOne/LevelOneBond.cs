@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System;
 
 public class LevelOneBond : MouseDrag {
 
@@ -80,6 +81,7 @@ public class LevelOneBond : MouseDrag {
                 break;
             case "Oxygen":
                 draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] = LevelOneAtomProperties.AtomBondingState.Successful;
                 break;
             default:
                 // Do nothing
@@ -88,10 +90,6 @@ public class LevelOneBond : MouseDrag {
 
         // Reset draggedAtom
         draggedAtom = null;
-    }
-
-    public void ProceedToNextLevel() {
-        SceneManager.LoadScene(1);
     }
 
     public void TriggerShellRotation(GameObject collidedAtom, GameObject draggedAtom) {
