@@ -87,7 +87,7 @@ public class LevelOneBond : MouseDrag {
                 // Do nothing
                 break;
         }
-
+        IsStageBondComplete();
         // Reset draggedAtom
         draggedAtom = null;
     }
@@ -109,5 +109,16 @@ public class LevelOneBond : MouseDrag {
             default:
                 break;
         }
+    }
+
+    public void IsStageBondComplete() {
+        if (atomPropertiesScript.hydrogenAtomListStates[0] == LevelOneAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomListStates[1] == LevelOneAtomProperties.AtomBondingState.Successful) {
+            StartCoroutine(ProceedToNextLevel());
+        }
+    }
+
+    IEnumerator ProceedToNextLevel() {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(2);
     }
 }
