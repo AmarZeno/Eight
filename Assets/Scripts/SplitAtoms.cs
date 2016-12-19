@@ -1,148 +1,98 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public class SplitAtoms : MonoBehaviour {
+public class SplitAtoms : MonoBehaviour
+{
 
-	public GameObject hydrogenTwo;
-	public GameObject hydrogenFour;
+    public GameObject hydrogenTwo;
+    public GameObject hydrogenFour;
 
-	public LayerMask touchInputMask;
+    public GameObject carbon;
+    public Vector2 hydrogenTwoDefaultLinearOffset = new Vector2(-16, -4);
+    public Vector2 hydrogenFourDefaultLinearOffset = new Vector2(0, -17);
 
-    private List<GameObject> touchList = new List<GameObject>();
-    private GameObject[] touchesOld;
+    private List<GameObject> gameObjectToBeSplitted = new List<GameObject>();
 
-    private RaycastHit hit;
+    private bool didBreakAtom = false;
+
+    // Variables
+    public GameObject atomProperties;
+    private LevelThreeAtomProperties atomPropertiesScript;
 
     // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+        atomPropertiesScript = atomProperties.GetComponent<LevelThreeAtomProperties>();
+        hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
+        hydrogenFour.GetComponent<MouseDrag>().enabled = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
 #if UNITY_EDITOR
         if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
         {
+            PointerEventData pointer = new PointerEventData(EventSystem.current);
+            pointer.position = Input.mousePosition;
 
-            touchesOld = new GameObject[touchList.Count];
-            touchList.CopyTo(touchesOld);
-            touchList.Clear();
+            List<RaycastResult> raycastResults = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointer, raycastResults);
 
-
-            Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray2, out hit, touchInputMask))
+            if (raycastResults.Count > 0 && didBreakAtom == false)
             {
-                GameObject recipient2 = hit.transform.gameObject;
-                touchList.Add(recipient2);
-
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // recipient.GetComponent<RelativeJoint2D>().enabled = false;
-                    recipient2.SendMessage("OnTouchDown", hit.point, SendMessageOptions.DontRequireReceiver);
-                }
-
-                if (Input.GetMouseButtonUp(0))
-                {
-                    recipient2.SendMessage("OnTouchUp", hit.point, SendMessageOptions.DontRequireReceiver);
-                }
-
-                if (Input.GetMouseButton(0))
-                {
-                    recipient2.SendMessage("OnTouchStay", hit.point, SendMessageOptions.DontRequireReceiver);
-                }
-
-                //if(recipient.transform.name == "Hydrogen2" || recipient.transform.name == "Hydrogen1"){
-
-                //	hydrogenFour.GetComponent<RelativeJoint2D> ().enabled = false;
-
-                //	hydrogenTwo.GetComponent<RelativeJoint2D> ().enabled = false;
-
-                //}
-
-                foreach (GameObject g in touchesOld)
-                {
-                    if (!touchList.Contains(g))
-                    {
-                        g.SendMessage("OnTouchExit", hit.point, SendMessageOptions.DontRequireReceiver);
-                    }
-                }
+                didBreakAtom = true;
+                // raycastResults[0].gameObject.transform.parent.gameObject.transform .position = Input.mousePosition;
+                hydrogenTwo.GetComponent<RelativeJoint2D>().enabled = false;
+                hydrogenFour.GetComponent<RelativeJoint2D>().enabled = false;
+                hydrogenFour.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
+                hydrogenTwo.transform.localPosition = new Vector3(hydrogenTwo.transform.localPosition.x, hydrogenTwo.transform.localPosition.y - 50, hydrogenTwo.transform.localPosition.z);
+                hydrogenFour.transform.localPosition = new Vector3(hydrogenFour.transform.localPosition.x, hydrogenFour.transform.localPosition.y + 50, hydrogenFour.transform.localPosition.z);
+                hydrogenTwo.GetComponent<MouseDrag>().enabled = true;
+                hydrogenFour.GetComponent<MouseDrag>().enabled = true;
+                hydrogenTwo.GetComponent<LevelThreeBond>().enabled = true;
+                hydrogenFour.GetComponent<LevelThreeBond>().enabled = true;
+                hydrogenTwo.GetComponent<RelativeJoint2D>().linearOffset = hydrogenTwoDefaultLinearOffset;
+                hydrogenFour.GetComponent<RelativeJoint2D>().linearOffset = hydrogenFourDefaultLinearOffset;
+                hydrogenTwo.transform.GetChild(2).localEulerAngles = new Vector3(0, 0, 120);
             }
         }
 #endif
 
-            if (Input.touchCount == 2) {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.tapCount == 2 && didBreakAtom == false)
+            {
 
-            touchesOld = new GameObject[touchList.Count];
-            touchList.CopyTo(touchesOld);
-            touchList.Clear();
+                PointerEventData pointer = new PointerEventData(EventSystem.current);
+                pointer.position = touch.position;
 
-			foreach (Touch touch in Input.touches) {
-				Ray ray1 = Camera.main.ScreenPointToRay(touch.position);
-				
-				if (Physics.Raycast (ray1, out hit, touchInputMask)) {
-					GameObject recipient =  hit.transform.gameObject;
-                    touchList.Add(recipient);
+                List<RaycastResult> raycastResults = new List<RaycastResult>();
+                EventSystem.current.RaycastAll(pointer, raycastResults);
 
-
-                    if (touch.phase == TouchPhase.Began) {
-                         recipient.GetComponent<RelativeJoint2D>().enabled = false;
-                        recipient.SendMessage("OnTouchDown", hit.point, SendMessageOptions.DontRequireReceiver);
+                if (raycastResults.Count > 0)
+                {
+                    if (raycastResults[0].gameObject.transform.parent.gameObject.name == "Hydrogen2" || raycastResults[0].gameObject.transform.parent.gameObject.name == "Hydrogen4")
+                    {
+                        hydrogenTwo.GetComponent<RelativeJoint2D>().enabled = false;
+                        hydrogenFour.GetComponent<RelativeJoint2D>().enabled = false;
+                        hydrogenFour.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
+                        hydrogenTwo.transform.localPosition = new Vector3(hydrogenTwo.transform.localPosition.x, hydrogenTwo.transform.localPosition.y - 50, hydrogenTwo.transform.localPosition.z);
+                        hydrogenFour.transform.localPosition = new Vector3(hydrogenFour.transform.localPosition.x, hydrogenFour.transform.localPosition.y + 50, hydrogenFour.transform.localPosition.z);
+                        hydrogenTwo.GetComponent<MouseDrag>().enabled = true;
+                        hydrogenFour.GetComponent<MouseDrag>().enabled = true;
+                        hydrogenTwo.GetComponent<LevelThreeBond>().enabled = true;
+                        hydrogenFour.GetComponent<LevelThreeBond>().enabled = true;
+                        hydrogenTwo.GetComponent<RelativeJoint2D>().linearOffset = hydrogenTwoDefaultLinearOffset;
+                        hydrogenFour.GetComponent<RelativeJoint2D>().linearOffset = hydrogenFourDefaultLinearOffset;
+                        hydrogenTwo.transform.GetChild(2).localEulerAngles = new Vector3(0, 0, 120);
+                        didBreakAtom = true;
                     }
-
-                    if (touch.phase == TouchPhase.Ended) {
-                        recipient.SendMessage("OnTouchUp", hit.point, SendMessageOptions.DontRequireReceiver);
-                    }
-
-                    if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-                        Vector3 objPosition = Camera.main.ScreenToWorldPoint(touch.position);
-                        recipient.gameObject.transform.position = objPosition;
-                        recipient.SendMessage("OnTouchStay", hit.point, SendMessageOptions.DontRequireReceiver);
-                    }
-
-                    if (touch.phase == TouchPhase.Canceled) {
-                        recipient.SendMessage("OnTouchExit", hit.point, SendMessageOptions.DontRequireReceiver);
-                    }
-
-					//if(recipient.transform.name == "Hydrogen2" || recipient.transform.name == "Hydrogen1"){
-						
-					//	hydrogenFour.GetComponent<RelativeJoint2D> ().enabled = false;
-
-					//	hydrogenTwo.GetComponent<RelativeJoint2D> ().enabled = false;
-
-					//}
-				}
-			}
-
-            foreach (GameObject g in touchesOld) {
-                if (!touchList.Contains(g)) {
-                    g.SendMessage("OnTouchExit", hit.point, SendMessageOptions.DontRequireReceiver);
                 }
             }
-
-			//TODO Fix split atoms
-			/*RaycastHit2D firstHitInformation = Physics2D.Raycast(hydrogenTwo.transform.position, Camera.main.transform.forward);
-			RaycastHit2D secondHitInformation = Physics2D.Raycast(hydrogenFour.transform.position, Camera.main.transform.forward);
-			if (firstHitInformation.collider.name == "Hydrogen1" && secondHitInformation.collider.name == "Hydrogen4") {
-				
-				//TODO update atom properties
-
-				//Vector3 realWorldPos0 = Camera.main.ScreenToWorldPoint(Input.GetTouch (0).position);
-				//Vector3 realWorldPos1  = Camera.main.ScreenToWorldPoint(Input.GetTouch (1).position);
-
-
-				Touch[] myTouches = Input.touches;
-
-					//Do something with the touches
-					hydrogenTwo.transform.localPosition = myTouches [0].position;
-					hydrogenFour.transform.localPosition = myTouches [1].position;
-				//}
-
-
-			}*/
-		}
-	}
+        }
+    }
 }

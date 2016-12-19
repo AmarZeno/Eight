@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LevelTwoBond : MouseDrag {
 
@@ -173,7 +174,7 @@ public class LevelTwoBond : MouseDrag {
                 // Do nothing
                 break;
         }
-
+        IsStageBondComplete();
         // Reset draggedAtom
         draggedAtom = null;
     }
@@ -211,5 +212,19 @@ public class LevelTwoBond : MouseDrag {
 		}
 		return true;
 	}
+
+    public void IsStageBondComplete()
+    {
+        if (atomPropertiesScript.flourineAtomListStates[0] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[1] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[2] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[3] == AtomProperties.AtomBondingState.Successful)
+        {
+            StartCoroutine(ProceedToNextLevel());
+        }
+    }
+
+    IEnumerator ProceedToNextLevel()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(3);
+    }
 
 }
