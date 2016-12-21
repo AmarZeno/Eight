@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
 
-public class SplitAtoms : MonoBehaviour
+public class SplitAtomsLevelThree : MonoBehaviour
 {
 
     public GameObject hydrogenOne;
@@ -117,7 +117,9 @@ public class SplitAtoms : MonoBehaviour
                 {
                     GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
                     // Prevent splitting for unknown states
-                    if (atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] == LevelThreeAtomProperties.AtomBondingState.Unknown)
+                    LevelThreeAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
+
+                    if (state == LevelThreeAtomProperties.AtomBondingState.Unknown)
                     {
                         return;
                     }
