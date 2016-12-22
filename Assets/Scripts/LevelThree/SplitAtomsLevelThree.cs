@@ -28,12 +28,12 @@ public class SplitAtomsLevelThree : MonoBehaviour
 
     // Variables
     public GameObject atomProperties;
-    private LevelTwoAtomProperties atomPropertiesScript;
+    private LevelThreeAtomProperties atomPropertiesScript;
 
     // Use this for initialization
     void Start()
     {
-        atomPropertiesScript = atomProperties.GetComponent<LevelTwoAtomProperties>();
+        atomPropertiesScript = atomProperties.GetComponent<LevelThreeAtomProperties>();
         hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
         hydrogenFour.GetComponent<MouseDrag>().enabled = false;
 
@@ -66,10 +66,10 @@ public class SplitAtomsLevelThree : MonoBehaviour
             {
                 GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
 
-                LevelTwoAtomProperties.AtomBondingState state = atomPropertiesScript.flourineAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
+                LevelThreeAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
                 // Prevent splitting for unknown states
-                if (state == LevelTwoAtomProperties.AtomBondingState.Unknown || state == LevelTwoAtomProperties.AtomBondingState.Successful) {
+                if (state == LevelThreeAtomProperties.AtomBondingState.Unknown || state == LevelThreeAtomProperties.AtomBondingState.Successful) {
                     return;
                 }
 
@@ -113,9 +113,9 @@ public class SplitAtomsLevelThree : MonoBehaviour
                 {
                     GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
                     // Prevent splitting for unknown states
-                    LevelTwoAtomProperties.AtomBondingState state = atomPropertiesScript.flourineAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
+                    LevelThreeAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
-                    if (state == LevelTwoAtomProperties.AtomBondingState.Unknown || state == LevelTwoAtomProperties.AtomBondingState.Successful)
+                    if (state == LevelThreeAtomProperties.AtomBondingState.Unknown || state == LevelThreeAtomProperties.AtomBondingState.Successful)
                     {
                         return;
                     }
@@ -171,24 +171,24 @@ public class SplitAtomsLevelThree : MonoBehaviour
         {
             gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenOneDefaultLinearOffset;
             gameObject.transform.GetChild(2).localEulerAngles = hydrogenOneDefaultShellEulerValues;
-            atomPropertiesScript.flourineAtomListStates[0] = LevelTwoAtomProperties.AtomBondingState.Unknown;
+            atomPropertiesScript.hydrogenAtomStateList[0] = LevelThreeAtomProperties.AtomBondingState.Unknown;
         }
         else if (gameObject.name == "Hydrogen2")
         {
             gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenTwoDefaultLinearOffset;
             gameObject.transform.GetChild(2).localEulerAngles = hydrogenTwoDefaultShellEulerValues;
-            atomPropertiesScript.flourineAtomListStates[1] = LevelTwoAtomProperties.AtomBondingState.Unknown;
+            atomPropertiesScript.hydrogenAtomStateList[1] = LevelThreeAtomProperties.AtomBondingState.Unknown;
         }
         else if (gameObject.name == "Hydrogen3")
         {
             gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenThreeDefaultLinearOffset;
             gameObject.transform.GetChild(2).localEulerAngles = hydrogenThreeDefaultShellEulerValues;
-            atomPropertiesScript.flourineAtomListStates[2] = LevelTwoAtomProperties.AtomBondingState.Unknown;
+            atomPropertiesScript.hydrogenAtomStateList[2] = LevelThreeAtomProperties.AtomBondingState.Unknown;
         }
         else if (gameObject.name == "Hydrogen4") {
             gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenFourDefaultLinearOffset;
             gameObject.transform.GetChild(2).localEulerAngles = hydrogenFourDefaultShellEulerValues;
-            atomPropertiesScript.flourineAtomListStates[3] = LevelTwoAtomProperties.AtomBondingState.Unknown;
+            atomPropertiesScript.hydrogenAtomStateList[3] = LevelThreeAtomProperties.AtomBondingState.Unknown;
         }
     }
 }

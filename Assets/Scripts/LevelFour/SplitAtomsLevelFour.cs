@@ -37,15 +37,15 @@ public class SplitAtomsLevelFour : MonoBehaviour
         hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
         hydrogenFour.GetComponent<MouseDrag>().enabled = false;
 
-        hydrogenTwoDefaultLinearOffset = new Vector2(-16, -4);
         hydrogenOneDefaultLinearOffset = hydrogenOne.GetComponent<RelativeJoint2D>().linearOffset;
+        hydrogenTwoDefaultLinearOffset = hydrogenTwo.GetComponent<RelativeJoint2D>().linearOffset;
         hydrogenThreeDefaultLinearOffset = hydrogenThree.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenFourDefaultLinearOffset = new Vector2(0, -17);
+        hydrogenFourDefaultLinearOffset = hydrogenFour.GetComponent<RelativeJoint2D>().linearOffset;
 
-        hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, 240);
-        hydrogenTwoDefaultShellEulerValues = new Vector3(0, 0, 120);
-        hydrogenThreeDefaultShellEulerValues = new Vector3(0, 0, 0);
-        hydrogenFourDefaultShellEulerValues = new Vector3(0, 0, 180);
+        hydrogenOneDefaultShellEulerValues = hydrogenOne.transform.GetChild(2).localEulerAngles;
+        hydrogenTwoDefaultShellEulerValues = hydrogenTwo.transform.GetChild(2).localEulerAngles;
+        hydrogenThreeDefaultShellEulerValues = hydrogenThree.transform.GetChild(2).localEulerAngles;
+        hydrogenFourDefaultShellEulerValues = hydrogenFour.transform.GetChild(2).localEulerAngles;
     }
 
     // Update is called once per frame
@@ -156,14 +156,17 @@ public class SplitAtomsLevelFour : MonoBehaviour
         {
             tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y - 50, tappedGameObject.transform.localPosition.z);
             connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y + 50, connectedGameObject.transform.localPosition.z);
-        } 
+        }
+
+        AssociateDefaultPositions(tappedGameObject);
+        AssociateDefaultPositions(connectedGameObject);
+
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
         tappedGameObject.GetComponent<LevelThreeBond>().enabled = true;
         connectedGameObject.GetComponent<MouseDrag>().enabled = true;
         connectedGameObject.GetComponent<LevelThreeBond>().enabled = true;
         tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
-        AssociateDefaultPositions(tappedGameObject);
-        AssociateDefaultPositions(connectedGameObject);
+        connectedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
     }
 
     void AssociateDefaultPositions(GameObject gameObject) {
