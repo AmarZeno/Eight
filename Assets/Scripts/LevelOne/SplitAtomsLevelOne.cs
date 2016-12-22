@@ -18,6 +18,7 @@ public class SplitAtomsLevelOne : MonoBehaviour {
     public Vector2 hydrogenTwoDefaultLinearOffset;
     public Vector3 hydrogenTwoDefaultShellEulerValues;
 
+
     // Use this for initialization
     void Start () {
         atomPropertiesScript = atomProperties.GetComponent<LevelOneAtomProperties>();
