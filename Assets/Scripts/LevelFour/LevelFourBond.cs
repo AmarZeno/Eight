@@ -222,7 +222,7 @@ public class LevelFourBond : MouseDrag {
             case "Hydrogen5":
                 {
                     // Break if already made a succesful bond
-                    if (atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Failed)
+                    if (atomPropertiesScript.hydrogenAtomStateList[4] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[4] == LevelFourAtomProperties.AtomBondingState.Failed)
                         break;
 
                     if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4" || draggedAtom.name == "Hydrogen6")
@@ -262,7 +262,7 @@ public class LevelFourBond : MouseDrag {
             case "Hydrogen6":
                 {
                     // Break if already made a succesful bond
-                    if (atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Failed)
+                    if (atomPropertiesScript.hydrogenAtomStateList[5] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[5] == LevelFourAtomProperties.AtomBondingState.Failed)
                         break;
 
                     if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4" || draggedAtom.name == "Hydrogen5")

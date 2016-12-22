@@ -16,15 +16,7 @@ public class SplitAtomsLevelFour : MonoBehaviour
     public GameObject[] hydrogenList;
 
     public GameObject carbon;
-    public Vector2 hydrogenOneDefaultLinearOffset;
-    public Vector2 hydrogenTwoDefaultLinearOffset;
-    public Vector2 hydrogenThreeDefaultLinearOffset;
-    public Vector2 hydrogenFourDefaultLinearOffset;
 
-    public Vector3 hydrogenOneDefaultShellEulerValues;
-    public Vector3 hydrogenTwoDefaultShellEulerValues;
-    public Vector3 hydrogenThreeDefaultShellEulerValues;
-    public Vector3 hydrogenFourDefaultShellEulerValues;
 
     // Variables
     public GameObject atomProperties;
@@ -38,15 +30,6 @@ public class SplitAtomsLevelFour : MonoBehaviour
         hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
         hydrogenFour.GetComponent<MouseDrag>().enabled = false;
 
-        hydrogenOneDefaultLinearOffset = hydrogenOne.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenTwoDefaultLinearOffset = hydrogenTwo.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenThreeDefaultLinearOffset = hydrogenThree.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenFourDefaultLinearOffset = hydrogenFour.GetComponent<RelativeJoint2D>().linearOffset;
-
-        hydrogenOneDefaultShellEulerValues = hydrogenOne.transform.GetChild(2).localEulerAngles;
-        hydrogenTwoDefaultShellEulerValues = hydrogenTwo.transform.GetChild(2).localEulerAngles;
-        hydrogenThreeDefaultShellEulerValues = hydrogenThree.transform.GetChild(2).localEulerAngles;
-        hydrogenFourDefaultShellEulerValues = hydrogenFour.transform.GetChild(2).localEulerAngles;
     }
 
     // Update is called once per frame
@@ -76,7 +59,9 @@ public class SplitAtomsLevelFour : MonoBehaviour
 
                 if (tappedGameObject.name == "Hydrogen1" || tappedGameObject.name == "Hydrogen2"
                     || tappedGameObject.name == "Hydrogen3" ||
-                    tappedGameObject.name == "Hydrogen4")
+                    tappedGameObject.name == "Hydrogen4" ||
+                    tappedGameObject.name == "Hydrogen5" ||
+                    tappedGameObject.name == "Hydrogen6")
                 {
                     if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
                     {
@@ -122,7 +107,9 @@ public class SplitAtomsLevelFour : MonoBehaviour
                     }
                     if (tappedGameObject.name == "Hydrogen1" || tappedGameObject.name == "Hydrogen2"
                         || tappedGameObject.name == "Hydrogen3" ||
-                        tappedGameObject.name == "Hydrogen4")
+                        tappedGameObject.name == "Hydrogen4" ||
+                    tappedGameObject.name == "Hydrogen5" ||
+                    tappedGameObject.name == "Hydrogen6")
                     {
 
                         if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
@@ -159,8 +146,8 @@ public class SplitAtomsLevelFour : MonoBehaviour
             connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y + 50, connectedGameObject.transform.localPosition.z);
         }
 
-        AssociateDefaultPositions(tappedGameObject);
-        AssociateDefaultPositions(connectedGameObject);
+        ApplyDefaultStates(tappedGameObject);
+        ApplyDefaultStates(connectedGameObject);
 
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
         tappedGameObject.GetComponent<LevelFourBond>().enabled = true;
@@ -170,29 +157,32 @@ public class SplitAtomsLevelFour : MonoBehaviour
         connectedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
     }
 
-    void AssociateDefaultPositions(GameObject gameObject) {
+    void ApplyDefaultStates(GameObject gameObject) {
         if (gameObject.name == "Hydrogen1")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenOneDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenOneDefaultShellEulerValues;
+
             atomPropertiesScript.hydrogenAtomStateList[0] = LevelFourAtomProperties.AtomBondingState.Unknown;
         }
         else if (gameObject.name == "Hydrogen2")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenTwoDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenTwoDefaultShellEulerValues;
+
             atomPropertiesScript.hydrogenAtomStateList[1] = LevelFourAtomProperties.AtomBondingState.Unknown;
         }
         else if (gameObject.name == "Hydrogen3")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenThreeDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenThreeDefaultShellEulerValues;
+
             atomPropertiesScript.hydrogenAtomStateList[2] = LevelFourAtomProperties.AtomBondingState.Unknown;
         }
         else if (gameObject.name == "Hydrogen4") {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenFourDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenFourDefaultShellEulerValues;
             atomPropertiesScript.hydrogenAtomStateList[3] = LevelFourAtomProperties.AtomBondingState.Unknown;
+        }
+        else if (gameObject.name == "Hydrogen5")
+        {
+            atomPropertiesScript.hydrogenAtomStateList[4] = LevelFourAtomProperties.AtomBondingState.Unknown;
+        }
+        else if (gameObject.name == "Hydrogen6")
+        {
+            atomPropertiesScript.hydrogenAtomStateList[5] = LevelFourAtomProperties.AtomBondingState.Unknown;
         }
     }
 }
