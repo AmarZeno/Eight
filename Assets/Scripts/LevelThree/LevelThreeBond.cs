@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LevelThreeBond : MouseDrag {
 	//TODO Replace AtomProperties
@@ -18,6 +19,8 @@ public class LevelThreeBond : MouseDrag {
 
     private GameObject draggedAtom = null;
     private LevelThreeAtomProperties atomPropertiesScript;
+
+    public GameObject finisherParticleSystem;
 
     void Start() {
 		atomPropertiesScript = atomProperties.GetComponent<LevelThreeAtomProperties>();
@@ -184,7 +187,7 @@ public class LevelThreeBond : MouseDrag {
                 // Do nothing
                 break;
         }
-
+        IsStageBondComplete();
         // Reset draggedAtom
         draggedAtom = null;
     }
@@ -207,4 +210,21 @@ public class LevelThreeBond : MouseDrag {
 		return true;
 	}
 
+    public void IsStageBondComplete()
+    {
+        if (atomPropertiesScript.hydrogenAtomStateList[0] == LevelThreeAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[1] == LevelThreeAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[2] == LevelThreeAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[3] == LevelThreeAtomProperties.AtomBondingState.Successful)
+        {
+            if (finisherParticleSystem.activeSelf == false)
+            {
+                finisherParticleSystem.SetActive(true);
+            }
+            StartCoroutine(ProceedToNextLevel());
+        }
+    }
+
+    IEnumerator ProceedToNextLevel()
+    {
+        yield return new WaitForSeconds(2f);
+       // SceneManager.LoadScene(3);
+    }
 }

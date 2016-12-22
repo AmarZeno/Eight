@@ -17,6 +17,8 @@ public class LevelTwoBond : MouseDrag {
     private bool isBondingFailed = false;
     private AtomProperties atomPropertiesScript;
 
+    public GameObject finisherParticleSystem;
+
     void Start() {
         atomPropertiesScript = atomProperties.GetComponent<AtomProperties>();
     }
@@ -217,6 +219,10 @@ public class LevelTwoBond : MouseDrag {
     {
         if (atomPropertiesScript.flourineAtomListStates[0] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[1] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[2] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[3] == AtomProperties.AtomBondingState.Successful)
         {
+            if (finisherParticleSystem.activeSelf == false)
+            {
+                finisherParticleSystem.SetActive(true);
+            }
             StartCoroutine(ProceedToNextLevel());
         }
     }
