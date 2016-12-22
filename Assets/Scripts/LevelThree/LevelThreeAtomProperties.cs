@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 public class LevelThreeAtomProperties : MonoBehaviour {    
 	public enum AtomBondingState { Unknown, Successful, Failed};
-	public List<AtomBondingState> hydrogenAtomStateList = new List<AtomBondingState> {AtomBondingState.Unknown, AtomBondingState.Failed, AtomBondingState.Unknown, AtomBondingState.Failed};
+	public List<AtomBondingState> flourineAtomStateList = new List<AtomBondingState> {AtomBondingState.Unknown, AtomBondingState.Failed, AtomBondingState.Unknown, AtomBondingState.Failed};
 }

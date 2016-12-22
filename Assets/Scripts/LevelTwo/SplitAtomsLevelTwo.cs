@@ -5,26 +5,26 @@ using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI;
 
-public class SplitAtomsLevelThree : MonoBehaviour
+public class SplitAtomsLevelTwo : MonoBehaviour
 {
 
-    public GameObject hydrogenOne;
-    public GameObject hydrogenTwo;
-    public GameObject hydrogenThree;
-    public GameObject hydrogenFour;
+    public GameObject fluorineOne;
+    public GameObject fluorineTwo;
+    public GameObject fluorineThree;
+    public GameObject fluorineFour;
 
-    public GameObject[] hydrogenList;
+    public GameObject[] fluorineList;
 
     public GameObject carbon;
-    public Vector2 hydrogenOneDefaultLinearOffset;
-    public Vector2 hydrogenTwoDefaultLinearOffset;
-    public Vector2 hydrogenThreeDefaultLinearOffset;
-    public Vector2 hydrogenFourDefaultLinearOffset;
+    public Vector2 fluorineOneDefaultLinearOffset;
+    public Vector2 fluorineTwoDefaultLinearOffset;
+    public Vector2 fluorineThreeDefaultLinearOffset;
+    public Vector2 fluorineFourDefaultLinearOffset;
 
-    public Vector3 hydrogenOneDefaultShellEulerValues;
-    public Vector3 hydrogenTwoDefaultShellEulerValues;
-    public Vector3 hydrogenThreeDefaultShellEulerValues;
-    public Vector3 hydrogenFourDefaultShellEulerValues;
+    public Vector3 fluorineOneDefaultShellEulerValues;
+    public Vector3 fluorineTwoDefaultShellEulerValues;
+    public Vector3 fluorineThreeDefaultShellEulerValues;
+    public Vector3 fluorineFourDefaultShellEulerValues;
 
     // Variables
     public GameObject atomProperties;
@@ -34,18 +34,18 @@ public class SplitAtomsLevelThree : MonoBehaviour
     void Start()
     {
         atomPropertiesScript = atomProperties.GetComponent<LevelTwoAtomProperties>();
-        hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
-        hydrogenFour.GetComponent<MouseDrag>().enabled = false;
+        fluorineTwo.GetComponent<MouseDrag>().enabled = false;
+        fluorineFour.GetComponent<MouseDrag>().enabled = false;
 
-        hydrogenTwoDefaultLinearOffset = new Vector2(-16, -4);
-        hydrogenOneDefaultLinearOffset = hydrogenOne.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenThreeDefaultLinearOffset = hydrogenThree.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenFourDefaultLinearOffset = new Vector2(0, -17);
+        fluorineTwoDefaultLinearOffset = fluorineTwo.GetComponent<RelativeJoint2D>().linearOffset;
+        fluorineOneDefaultLinearOffset = fluorineOne.GetComponent<RelativeJoint2D>().linearOffset;
+        fluorineThreeDefaultLinearOffset = fluorineThree.GetComponent<RelativeJoint2D>().linearOffset;
+        fluorineFourDefaultLinearOffset = fluorineFour.GetComponent<RelativeJoint2D>().linearOffset;
 
-        hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, 240);
-        hydrogenTwoDefaultShellEulerValues = new Vector3(0, 0, 120);
-        hydrogenThreeDefaultShellEulerValues = new Vector3(0, 0, 0);
-        hydrogenFourDefaultShellEulerValues = new Vector3(0, 0, 180);
+        fluorineOneDefaultShellEulerValues = fluorineOne.transform.GetChild(2).localEulerAngles;
+        fluorineTwoDefaultShellEulerValues = fluorineTwo.transform.GetChild(2).localEulerAngles;
+        fluorineThreeDefaultShellEulerValues = fluorineThree.transform.GetChild(2).localEulerAngles;
+        fluorineFourDefaultShellEulerValues = fluorineFour.transform.GetChild(2).localEulerAngles;
     }
 
     // Update is called once per frame
@@ -73,9 +73,9 @@ public class SplitAtomsLevelThree : MonoBehaviour
                     return;
                 }
 
-                if (tappedGameObject.name == "Hydrogen1" || tappedGameObject.name == "Hydrogen2"
-                    || tappedGameObject.name == "Hydrogen3" ||
-                    tappedGameObject.name == "Hydrogen4")
+                if (tappedGameObject.name == "Fluorine1" || tappedGameObject.name == "Fluorine2"
+                    || tappedGameObject.name == "Fluorine3" ||
+                    tappedGameObject.name == "Fluorine4")
                 {
                     if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
                     {
@@ -86,11 +86,11 @@ public class SplitAtomsLevelThree : MonoBehaviour
                     {
                         // Check for gameObject that holds joint with the tapped gameobject
                         
-                        foreach (GameObject hydrogen in hydrogenList)
+                        foreach (GameObject fluorine in fluorineList)
                         {
-                            if (hydrogen.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>())
+                            if (fluorine.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>())
                             {
-                                SplitAtom(hydrogen);
+                                SplitAtom(fluorine);
                             }
                         }
                     }
@@ -119,9 +119,9 @@ public class SplitAtomsLevelThree : MonoBehaviour
                     {
                         return;
                     }
-                    if (tappedGameObject.name == "Hydrogen1" || tappedGameObject.name == "Hydrogen2"
-                        || tappedGameObject.name == "Hydrogen3" ||
-                        tappedGameObject.name == "Hydrogen4")
+                    if (tappedGameObject.name == "Fluorine1" || tappedGameObject.name == "Fluorine2"
+                        || tappedGameObject.name == "Fluorine3" ||
+                        tappedGameObject.name == "Fluorine4")
                     {
 
                         if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
@@ -132,9 +132,9 @@ public class SplitAtomsLevelThree : MonoBehaviour
                         else {
                             // Check for gameObject that holds joint with the tapped gameobject
 
-                            foreach (GameObject hydrogen in hydrogenList) {
-                                if (hydrogen.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>()) {
-                                    SplitAtom(hydrogen);
+                            foreach (GameObject fluorine in fluorineList) {
+                                if (fluorine.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>()) {
+                                    SplitAtom(fluorine);
                                 }
                             }
                         }
@@ -147,47 +147,51 @@ public class SplitAtomsLevelThree : MonoBehaviour
     void SplitAtom(GameObject tappedGameObject) {
         GameObject connectedGameObject = tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody.gameObject;
         tappedGameObject.GetComponent<RelativeJoint2D>().enabled = false;
+
         if (tappedGameObject.transform.localPosition.y > connectedGameObject.transform.localPosition.y)
         { // If tappedObject is on top
             tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y + 50, tappedGameObject.transform.localPosition.z);
             connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y - 50, connectedGameObject.transform.localPosition.z);
         }
-        else
-        {
+        else {
             tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y - 50, tappedGameObject.transform.localPosition.z);
             connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y + 50, connectedGameObject.transform.localPosition.z);
         }
-        tappedGameObject.GetComponent<MouseDrag>().enabled = true;
-        tappedGameObject.GetComponent<LevelThreeBond>().enabled = true;
-        connectedGameObject.GetComponent<MouseDrag>().enabled = true;
-        connectedGameObject.GetComponent<LevelThreeBond>().enabled = true;
-        tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
+        
+        
         AssociateDefaultPositions(tappedGameObject);
         AssociateDefaultPositions(connectedGameObject);
+
+        tappedGameObject.GetComponent<MouseDrag>().enabled = true;
+        tappedGameObject.GetComponent<LevelTwoBond>().enabled = true;
+        connectedGameObject.GetComponent<MouseDrag>().enabled = true;
+        connectedGameObject.GetComponent<LevelTwoBond>().enabled = true;
+        tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
+        connectedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
     }
 
     void AssociateDefaultPositions(GameObject gameObject) {
-        if (gameObject.name == "Hydrogen1")
+        if (gameObject.name == "Fluorine1")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenOneDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenOneDefaultShellEulerValues;
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = fluorineOneDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = fluorineOneDefaultShellEulerValues;
             atomPropertiesScript.flourineAtomListStates[0] = LevelTwoAtomProperties.AtomBondingState.Unknown;
         }
-        else if (gameObject.name == "Hydrogen2")
+        else if (gameObject.name == "Fluorine2")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenTwoDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenTwoDefaultShellEulerValues;
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = fluorineTwoDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = fluorineTwoDefaultShellEulerValues;
             atomPropertiesScript.flourineAtomListStates[1] = LevelTwoAtomProperties.AtomBondingState.Unknown;
         }
-        else if (gameObject.name == "Hydrogen3")
+        else if (gameObject.name == "Fluorine3")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenThreeDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenThreeDefaultShellEulerValues;
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = fluorineThreeDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = fluorineThreeDefaultShellEulerValues;
             atomPropertiesScript.flourineAtomListStates[2] = LevelTwoAtomProperties.AtomBondingState.Unknown;
         }
-        else if (gameObject.name == "Hydrogen4") {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenFourDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenFourDefaultShellEulerValues;
+        else if (gameObject.name == "Fluorine4") {
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = fluorineFourDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = fluorineFourDefaultShellEulerValues;
             atomPropertiesScript.flourineAtomListStates[3] = LevelTwoAtomProperties.AtomBondingState.Unknown;
         }
     }

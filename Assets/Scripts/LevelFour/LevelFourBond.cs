@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class LevelFourBond : MouseDrag {
 	//TODO Replace AtomProperties
     // Constants
-    Vector2 hydrogenAtomDefaultLinearOffset;
     Vector2 hydrogenAtomOverridenLinearOffset;
 
     Vector3 hydrogenShellFacingDown;
@@ -25,7 +24,6 @@ public class LevelFourBond : MouseDrag {
     void Start() {
 		atomPropertiesScript = atomProperties.GetComponent<LevelFourAtomProperties>();
 
-        hydrogenAtomDefaultLinearOffset = new Vector2(0, 19);
         hydrogenAtomOverridenLinearOffset = new Vector2(0, -15);
 
         hydrogenShellFacingUp = new Vector3(0, 0, 0);

@@ -26,8 +26,6 @@ public class SplitAtomsLevelFour : MonoBehaviour
     public Vector3 hydrogenThreeDefaultShellEulerValues;
     public Vector3 hydrogenFourDefaultShellEulerValues;
 
-    private List<GameObject> gameObjectToBeSplitted = new List<GameObject>();
-
     // Variables
     public GameObject atomProperties;
     private LevelFourAtomProperties atomPropertiesScript;
@@ -149,8 +147,16 @@ public class SplitAtomsLevelFour : MonoBehaviour
     void SplitAtom(GameObject tappedGameObject) {
         GameObject connectedGameObject = tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody.gameObject;
         tappedGameObject.GetComponent<RelativeJoint2D>().enabled = false;
-        tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y + 50, tappedGameObject.transform.localPosition.z);
-        connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y - 50, connectedGameObject.transform.localPosition.z);
+        if (tappedGameObject.transform.localPosition.y > connectedGameObject.transform.localPosition.y)
+        { // If tappedObject is on top
+            tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y + 50, tappedGameObject.transform.localPosition.z);
+            connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y - 50, connectedGameObject.transform.localPosition.z);
+        }
+        else
+        {
+            tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y - 50, tappedGameObject.transform.localPosition.z);
+            connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y + 50, connectedGameObject.transform.localPosition.z);
+        } 
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
         tappedGameObject.GetComponent<LevelThreeBond>().enabled = true;
         connectedGameObject.GetComponent<MouseDrag>().enabled = true;

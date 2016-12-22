@@ -14,13 +14,12 @@ public class LevelTwoBond : MouseDrag {
     public GameObject atomProperties;
 
     private GameObject draggedAtom = null;
-    private bool isBondingFailed = false;
-    private AtomProperties atomPropertiesScript;
+    private LevelTwoAtomProperties atomPropertiesScript;
 
     public GameObject finisherParticleSystem;
 
     void Start() {
-        atomPropertiesScript = atomProperties.GetComponent<AtomProperties>();
+        atomPropertiesScript = atomProperties.GetComponent<LevelTwoAtomProperties>();
     }
 
     public override void OnDrag(PointerEventData eventData)
@@ -36,7 +35,7 @@ public class LevelTwoBond : MouseDrag {
     void Bond(Collider2D otherAtomCollider) {
 
         // Prevent bonding when the user is not dragging an atom and when he makes a wrong bonding
-		if (draggedAtom == null || isBondingFailed == true)
+		if (draggedAtom == null)
             return;
 
         GameObject collidedAtom = otherAtomCollider.GetComponent<Collider2D>().gameObject;
@@ -51,7 +50,7 @@ public class LevelTwoBond : MouseDrag {
             case "Fluorine1":
                 {
                     // Break if already made a bond
-                    if (atomPropertiesScript.flourineAtomListStates[0] == AtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[0] == AtomProperties.AtomBondingState.Failed)
+                    if (atomPropertiesScript.flourineAtomListStates[0] == LevelTwoAtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[0] == LevelTwoAtomProperties.AtomBondingState.Failed)
                         break;
 
                     if (draggedAtom.name == "Fluorine2" || draggedAtom.name == "Fluorine3" || draggedAtom.name == "Fluorine4")
@@ -61,13 +60,12 @@ public class LevelTwoBond : MouseDrag {
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
-                        isBondingFailed = true;
-						atomPropertiesScript.flourineAtomListStates [0] = AtomProperties.AtomBondingState.Failed;
-						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [0] = LevelTwoAtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-						atomPropertiesScript.flourineAtomListStates [0] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [0] = LevelTwoAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -77,7 +75,7 @@ public class LevelTwoBond : MouseDrag {
             case "Fluorine2":
                 {
                     // Break if already made a bond
-					if (atomPropertiesScript.flourineAtomListStates[1] == AtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[1] == AtomProperties.AtomBondingState.Failed)
+					if (atomPropertiesScript.flourineAtomListStates[1] == LevelTwoAtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[1] == LevelTwoAtomProperties.AtomBondingState.Failed)
 						break;
 
                     if (draggedAtom.name == "Fluorine1" || draggedAtom.name == "Fluorine3" || draggedAtom.name == "Fluorine4")
@@ -87,13 +85,12 @@ public class LevelTwoBond : MouseDrag {
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
-                        isBondingFailed = true;
-						atomPropertiesScript.flourineAtomListStates [1] = AtomProperties.AtomBondingState.Failed;
-						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [1] = LevelTwoAtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-						atomPropertiesScript.flourineAtomListStates [1] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [1] = LevelTwoAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -103,7 +100,7 @@ public class LevelTwoBond : MouseDrag {
             case "Fluorine3":
                 {
                     // Break if already made a bond
-					if (atomPropertiesScript.flourineAtomListStates[2] == AtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[2] == AtomProperties.AtomBondingState.Failed)
+					if (atomPropertiesScript.flourineAtomListStates[2] == LevelTwoAtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[2] == LevelTwoAtomProperties.AtomBondingState.Failed)
 						break;
 
                     if (draggedAtom.name == "Fluorine1" || draggedAtom.name == "Fluorine2" || draggedAtom.name == "Fluorine4")
@@ -113,13 +110,12 @@ public class LevelTwoBond : MouseDrag {
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
-                        isBondingFailed = true;
-						atomPropertiesScript.flourineAtomListStates [2] = AtomProperties.AtomBondingState.Failed;
-						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [2] = LevelTwoAtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-						atomPropertiesScript.flourineAtomListStates [2] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [2] = LevelTwoAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -129,7 +125,7 @@ public class LevelTwoBond : MouseDrag {
             case "Fluorine4":
                 {
                     // Break if already made a succesful bond
-					if (atomPropertiesScript.flourineAtomListStates[3] == AtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[3] == AtomProperties.AtomBondingState.Failed)
+					if (atomPropertiesScript.flourineAtomListStates[3] == LevelTwoAtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates[3] == LevelTwoAtomProperties.AtomBondingState.Failed)
 						break;
 
                     if (draggedAtom.name == "Fluorine1" || draggedAtom.name == "Fluorine2" || draggedAtom.name == "Fluorine3")
@@ -139,13 +135,12 @@ public class LevelTwoBond : MouseDrag {
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = fluorineAtomLinearOffset;
-                        isBondingFailed = true;
-						atomPropertiesScript.flourineAtomListStates [3] = AtomProperties.AtomBondingState.Failed;
-						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [3] = LevelTwoAtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-						atomPropertiesScript.flourineAtomListStates [3] = AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.flourineAtomListStates [3] = LevelTwoAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -157,16 +152,16 @@ public class LevelTwoBond : MouseDrag {
 				draggedAtom.GetComponent<LevelTwoBond> ().enabled = false;
                 switch (draggedAtom.name) {
 					case "Fluorine1":
-						atomPropertiesScript.flourineAtomListStates [0] = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates [0] = LevelTwoAtomProperties.AtomBondingState.Successful;
                         break;
                     case "Fluorine2":
-						atomPropertiesScript.flourineAtomListStates[1] = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates[1] = LevelTwoAtomProperties.AtomBondingState.Successful;
                         break;
                     case "Fluorine3":
-						atomPropertiesScript.flourineAtomListStates[2] = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates[2] = LevelTwoAtomProperties.AtomBondingState.Successful;
                         break;
                     case "Fluorine4":
-						atomPropertiesScript.flourineAtomListStates[3] = AtomProperties.AtomBondingState.Successful;
+						atomPropertiesScript.flourineAtomListStates[3] = LevelTwoAtomProperties.AtomBondingState.Successful;
                         break;
                     default:
                         break;
@@ -207,7 +202,7 @@ public class LevelTwoBond : MouseDrag {
 		// Check states for the dragged atom
 		for(int i = 1; i<atomPropertiesScript.flourineAtomListStates.Count; i++){
 			if(i == draggedAtom.name [draggedAtom.name.Length - 1]){
-				if (atomPropertiesScript.flourineAtomListStates [i - 1] == AtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates [i - 1] == AtomProperties.AtomBondingState.Failed) {
+				if (atomPropertiesScript.flourineAtomListStates [i - 1] == LevelTwoAtomProperties.AtomBondingState.Successful || atomPropertiesScript.flourineAtomListStates [i - 1] == LevelTwoAtomProperties.AtomBondingState.Failed) {
 					return false;
 				}
 			}
@@ -217,7 +212,7 @@ public class LevelTwoBond : MouseDrag {
 
     public void IsStageBondComplete()
     {
-        if (atomPropertiesScript.flourineAtomListStates[0] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[1] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[2] == AtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[3] == AtomProperties.AtomBondingState.Successful)
+        if (atomPropertiesScript.flourineAtomListStates[0] == LevelTwoAtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[1] == LevelTwoAtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[2] == LevelTwoAtomProperties.AtomBondingState.Successful && atomPropertiesScript.flourineAtomListStates[3] == LevelTwoAtomProperties.AtomBondingState.Successful)
         {
             if (finisherParticleSystem.activeSelf == false)
             {
