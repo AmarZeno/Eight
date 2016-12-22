@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 
-public class LevelThreeBond : MouseDrag {
+public class LevelFourBond : MouseDrag {
 	//TODO Replace AtomProperties
     // Constants
     Vector2 hydrogenAtomDefaultLinearOffset;
@@ -18,12 +18,12 @@ public class LevelThreeBond : MouseDrag {
     public GameObject atomProperties;
 
     private GameObject draggedAtom = null;
-    private LevelThreeAtomProperties atomPropertiesScript;
+    private LevelFourAtomProperties atomPropertiesScript;
 
     public GameObject finisherParticleSystem;
 
     void Start() {
-		atomPropertiesScript = atomProperties.GetComponent<LevelThreeAtomProperties>();
+		atomPropertiesScript = atomProperties.GetComponent<LevelFourAtomProperties>();
 
         hydrogenAtomDefaultLinearOffset = new Vector2(0, 19);
         hydrogenAtomOverridenLinearOffset = new Vector2(0, -15);
@@ -65,7 +65,7 @@ public class LevelThreeBond : MouseDrag {
             case "Hydrogen1":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[0] == LevelThreeAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[0] == LevelThreeAtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.hydrogenAtomStateList[0] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[0] == LevelFourAtomProperties.AtomBondingState.Failed)
                         break;
 
                     if (draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4")
@@ -76,22 +76,22 @@ public class LevelThreeBond : MouseDrag {
 
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-				    	atomPropertiesScript.hydrogenAtomStateList [0] = LevelThreeAtomProperties.AtomBondingState.Failed;
-					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
+				    	atomPropertiesScript.hydrogenAtomStateList [0] = LevelFourAtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-					    atomPropertiesScript.hydrogenAtomStateList [0] = LevelThreeAtomProperties.AtomBondingState.Successful;
+					    atomPropertiesScript.hydrogenAtomStateList [0] = LevelFourAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
-					collidedAtom.GetComponent<LevelThreeBond> ().enabled = false;
+					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 }
                 break;
             case "Hydrogen2":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[1] == LevelThreeAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[1] == LevelThreeAtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.hydrogenAtomStateList[1] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[1] == LevelFourAtomProperties.AtomBondingState.Failed)
 						break;
 
                     if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4")
@@ -101,22 +101,22 @@ public class LevelThreeBond : MouseDrag {
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-						atomPropertiesScript.hydrogenAtomStateList [1] = LevelThreeAtomProperties.AtomBondingState.Failed;
-						atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.hydrogenAtomStateList [1] = LevelFourAtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-					    atomPropertiesScript.hydrogenAtomStateList [1] = LevelThreeAtomProperties.AtomBondingState.Successful;
+					    atomPropertiesScript.hydrogenAtomStateList [1] = LevelFourAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
-					collidedAtom.GetComponent<LevelThreeBond> ().enabled = false;
+					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 }
                 break;
             case "Hydrogen3":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[2] == LevelThreeAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[2] == LevelThreeAtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.hydrogenAtomStateList[2] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[2] == LevelFourAtomProperties.AtomBondingState.Failed)
 						break;
 
                     if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen4")
@@ -126,22 +126,22 @@ public class LevelThreeBond : MouseDrag {
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-					    atomPropertiesScript.hydrogenAtomStateList [2] = LevelThreeAtomProperties.AtomBondingState.Failed;
-					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.hydrogenAtomStateList [2] = LevelFourAtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-				    	atomPropertiesScript.hydrogenAtomStateList [2] = LevelThreeAtomProperties.AtomBondingState.Successful;
+				    	atomPropertiesScript.hydrogenAtomStateList [2] = LevelFourAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
-					collidedAtom.GetComponent<LevelThreeBond> ().enabled = false;
+					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 }
                 break;
             case "Hydrogen4":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[3] == LevelThreeAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == LevelThreeAtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Failed)
 						break;
 
                     if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3")
@@ -151,33 +151,33 @@ public class LevelThreeBond : MouseDrag {
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-					    atomPropertiesScript.hydrogenAtomStateList [3] = LevelThreeAtomProperties.AtomBondingState.Failed;
-					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.hydrogenAtomStateList [3] = LevelFourAtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                     }
                     else {
-					atomPropertiesScript.hydrogenAtomStateList [3] = LevelThreeAtomProperties.AtomBondingState.Successful;
+					    atomPropertiesScript.hydrogenAtomStateList [3] = LevelFourAtomProperties.AtomBondingState.Successful;
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
-					collidedAtom.GetComponent<LevelThreeBond> ().enabled = false;
+					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 }
                 break;
             case "Carbon":
                 draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
-				draggedAtom.GetComponent<LevelThreeBond> ().enabled = false;
+				draggedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 switch (draggedAtom.name) {
                     case "Hydrogen1":
-				            atomPropertiesScript.hydrogenAtomStateList[0] = LevelThreeAtomProperties.AtomBondingState.Successful;
+				            atomPropertiesScript.hydrogenAtomStateList[0] = LevelFourAtomProperties.AtomBondingState.Successful;
                         break;
                     case "Hydrogen2":
-			            	atomPropertiesScript.hydrogenAtomStateList[1] = LevelThreeAtomProperties.AtomBondingState.Successful;
+			            	atomPropertiesScript.hydrogenAtomStateList[1] = LevelFourAtomProperties.AtomBondingState.Successful;
                         break;
                     case "Hydrogen3":
-			            	atomPropertiesScript.hydrogenAtomStateList[2] = LevelThreeAtomProperties.AtomBondingState.Successful;
+			            	atomPropertiesScript.hydrogenAtomStateList[2] = LevelFourAtomProperties.AtomBondingState.Successful;
                         break;
                     case "Hydrogen4":
-			            	atomPropertiesScript.hydrogenAtomStateList[3] = LevelThreeAtomProperties.AtomBondingState.Successful;
+			            	atomPropertiesScript.hydrogenAtomStateList[3] = LevelFourAtomProperties.AtomBondingState.Successful;
                         break;
                     default:
                         break;
@@ -202,7 +202,7 @@ public class LevelThreeBond : MouseDrag {
 		// Check states for the dragged atom
 		for(int i = 1; i<atomPropertiesScript.hydrogenAtomStateList.Count; i++){
 			if(i == draggedAtom.name [draggedAtom.name.Length - 1]){
-				if (atomPropertiesScript.hydrogenAtomStateList [i - 1] == LevelThreeAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList [i - 1] == LevelThreeAtomProperties.AtomBondingState.Failed) {
+				if (atomPropertiesScript.hydrogenAtomStateList [i - 1] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList [i - 1] == LevelFourAtomProperties.AtomBondingState.Failed) {
 					return false;
 				}
 			}
@@ -212,7 +212,7 @@ public class LevelThreeBond : MouseDrag {
 
     public void IsStageBondComplete()
     {
-        if (atomPropertiesScript.hydrogenAtomStateList[0] == LevelThreeAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[1] == LevelThreeAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[2] == LevelThreeAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[3] == LevelThreeAtomProperties.AtomBondingState.Successful)
+        if (atomPropertiesScript.hydrogenAtomStateList[0] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[1] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[2] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful)
         {
             if (finisherParticleSystem.activeSelf == false)
             {
