@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.UI;
 
 public class SplitAtomsLevelThree : MonoBehaviour
 {
@@ -26,8 +27,6 @@ public class SplitAtomsLevelThree : MonoBehaviour
     public Vector3 hydrogenFourDefaultShellEulerValues;
 
     private List<GameObject> gameObjectToBeSplitted = new List<GameObject>();
-
-    private bool didBreakAtom = false;
 
     // Variables
     public GameObject atomProperties;
@@ -71,7 +70,7 @@ public class SplitAtomsLevelThree : MonoBehaviour
                 LevelThreeAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
                 // Prevent splitting for unknown states
-                if (state == LevelThreeAtomProperties.AtomBondingState.Unknown) {
+                if (state == LevelThreeAtomProperties.AtomBondingState.Unknown || state == LevelThreeAtomProperties.AtomBondingState.Successful) {
                     return;
                 }
 
@@ -79,7 +78,6 @@ public class SplitAtomsLevelThree : MonoBehaviour
                     || tappedGameObject.name == "Hydrogen3" ||
                     tappedGameObject.name == "Hydrogen4")
                 {
-
                     if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
                     {
                         // If the tapped gameobject has an enabled Joint then continue splitting that Atom
@@ -88,7 +86,7 @@ public class SplitAtomsLevelThree : MonoBehaviour
                     else
                     {
                         // Check for gameObject that holds joint with the tapped gameobject
-
+                        
                         foreach (GameObject hydrogen in hydrogenList)
                         {
                             if (hydrogen.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>())
@@ -104,9 +102,8 @@ public class SplitAtomsLevelThree : MonoBehaviour
 
         foreach (Touch touch in Input.touches)
         {
-            if (touch.tapCount == 2 && didBreakAtom == false)
+            if (touch.tapCount == 2)
             {
-
                 PointerEventData pointer = new PointerEventData(EventSystem.current);
                 pointer.position = touch.position;
 
@@ -119,7 +116,7 @@ public class SplitAtomsLevelThree : MonoBehaviour
                     // Prevent splitting for unknown states
                     LevelThreeAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
-                    if (state == LevelThreeAtomProperties.AtomBondingState.Unknown)
+                    if (state == LevelThreeAtomProperties.AtomBondingState.Unknown || state == LevelThreeAtomProperties.AtomBondingState.Successful)
                     {
                         return;
                     }
@@ -160,7 +157,6 @@ public class SplitAtomsLevelThree : MonoBehaviour
         tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
         AssociateDefaultPositions(tappedGameObject);
         AssociateDefaultPositions(connectedGameObject);
-        didBreakAtom = true;
     }
 
     void AssociateDefaultPositions(GameObject gameObject) {
