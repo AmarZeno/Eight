@@ -22,7 +22,8 @@ public class LevelFourBond : MouseDrag {
     private GameObject draggedAtom = null;
     private LevelFourAtomProperties atomPropertiesScript;
 
-    public GameObject finisherParticleSystem;
+    public GameObject firstFinisherParticleSystem;
+    public GameObject secondFinisherParticleSystem;
 
     void Start() {
 		atomPropertiesScript = atomProperties.GetComponent<LevelFourAtomProperties>();
@@ -304,6 +305,7 @@ public class LevelFourBond : MouseDrag {
                 {
                     // Enable carbon1 joint
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    atomPropertiesScript.carbonCarbonSuccessBonds = atomPropertiesScript.carbonCarbonSuccessBonds + 1;
                 }
                 else
                 {
@@ -321,6 +323,7 @@ public class LevelFourBond : MouseDrag {
                 {
                     // Enable carbon1 joint
                     draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    atomPropertiesScript.carbonCarbonSuccessBonds = atomPropertiesScript.carbonCarbonSuccessBonds + 1;
                 }
                 else
                 {
@@ -383,12 +386,14 @@ public class LevelFourBond : MouseDrag {
 
     public void IsStageBondComplete()
     {
-        if (atomPropertiesScript.hydrogenAtomStateList[0] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[1] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[2] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful
-            && atomPropertiesScript.hydrogenAtomStateList[4] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[5] == LevelFourAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[6] == LevelFourAtomProperties.AtomBondingState.Successful)
+        if (atomPropertiesScript.firstCarbonSuccessBonds == 3 && atomPropertiesScript.secondCarbonSuccessBonds == 6 && atomPropertiesScript.carbonCarbonSuccessBonds == 1)
         {
-            if (finisherParticleSystem.activeSelf == false)
+            if (firstFinisherParticleSystem.activeSelf == false)
             {
-                finisherParticleSystem.SetActive(true);
+                firstFinisherParticleSystem.SetActive(true);
+            }
+            if (secondFinisherParticleSystem.activeSelf == false) {
+                secondFinisherParticleSystem.SetActive(true);
             }
             StartCoroutine(ProceedToNextLevel());
         }
@@ -397,6 +402,6 @@ public class LevelFourBond : MouseDrag {
     IEnumerator ProceedToNextLevel()
     {
         yield return new WaitForSeconds(2f);
-       // SceneManager.LoadScene(3);
+        SceneManager.LoadScene(5);
     }
 }

@@ -11,4 +11,5 @@ public class LevelFourAtomProperties : MonoBehaviour {
 
     public int firstCarbonSuccessBonds = 0;
     public int secondCarbonSuccessBonds = 3;
+    public int carbonCarbonSuccessBonds = 0;
 }
