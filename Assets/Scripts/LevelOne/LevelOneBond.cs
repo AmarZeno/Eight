@@ -14,9 +14,11 @@ public class LevelOneBond : MouseDrag {
     private GameObject draggedAtom;
 	private LevelOneAtomProperties atomPropertiesScript;
 
-	void Start(){
-		atomPropertiesScript = atomProperties.GetComponent<LevelOneAtomProperties>();
-	}
+    public GameObject finisherParticleSystem;
+
+    void Start(){
+        atomPropertiesScript = atomProperties.GetComponent<LevelOneAtomProperties>();
+    }
 
     public override void OnDrag(PointerEventData eventData)
     {
@@ -46,15 +48,20 @@ public class LevelOneBond : MouseDrag {
 					// Break if already made a bond
 				if (atomPropertiesScript.hydrogenAtomListStates[0] == LevelOneAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomListStates[0] == LevelOneAtomProperties.AtomBondingState.Failed)
 						break;
-				
+
                     if (draggedAtom.name == "Hydrogen2")
                     {
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomLinearOffset;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+                        atomPropertiesScript.hydrogenAtomListStates[0] = LevelOneAtomProperties.AtomBondingState.Failed;
+                        atomPropertiesScript.hydrogenAtomListStates[1] = LevelOneAtomProperties.AtomBondingState.Failed;
                     }
-					atomPropertiesScript.hydrogenAtomListStates [0] = LevelOneAtomProperties.AtomBondingState.Failed;
-					atomPropertiesScript.hydrogenAtomListStates [1] = LevelOneAtomProperties.AtomBondingState.Failed;
+                    else {
+                        // Make collided element state success
+                        atomPropertiesScript.hydrogenAtomListStates[0] = LevelOneAtomProperties.AtomBondingState.Successful;
+                    }
+					
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                 }
@@ -69,9 +76,13 @@ public class LevelOneBond : MouseDrag {
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomLinearOffset;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+                        atomPropertiesScript.hydrogenAtomListStates[0] = LevelOneAtomProperties.AtomBondingState.Failed;
+                        atomPropertiesScript.hydrogenAtomListStates[1] = LevelOneAtomProperties.AtomBondingState.Failed;
                     }
-					atomPropertiesScript.hydrogenAtomListStates [0] = LevelOneAtomProperties.AtomBondingState.Failed;
-					atomPropertiesScript.hydrogenAtomListStates [1] = LevelOneAtomProperties.AtomBondingState.Failed;
+                    else {
+                        // Make collided element state success
+                        atomPropertiesScript.hydrogenAtomListStates[1] = LevelOneAtomProperties.AtomBondingState.Successful;
+                    }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                 }
@@ -110,6 +121,10 @@ public class LevelOneBond : MouseDrag {
 
     public void IsStageBondComplete() {
         if (atomPropertiesScript.hydrogenAtomListStates[0] == LevelOneAtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomListStates[1] == LevelOneAtomProperties.AtomBondingState.Successful) {
+            if (finisherParticleSystem.activeSelf == false)
+            {
+                finisherParticleSystem.SetActive(true);
+            }
             StartCoroutine(ProceedToNextLevel());
         }
     }
