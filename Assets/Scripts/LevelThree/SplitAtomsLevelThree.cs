@@ -55,6 +55,7 @@ public class SplitAtomsLevelThree : MonoBehaviour
     {
 
 #if UNITY_EDITOR
+        /* For testing touch logics in unity*/
         if (Input.GetMouseButton(1) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonUp(1))
         {
             PointerEventData pointer = new PointerEventData(EventSystem.current);

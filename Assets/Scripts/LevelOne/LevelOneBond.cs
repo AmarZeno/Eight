@@ -12,7 +12,6 @@ public class LevelOneBond : MouseDrag {
 	// Variables
 	public GameObject atomProperties;
     private GameObject draggedAtom;
-    private bool isBondingFailed = false;
 	private LevelOneAtomProperties atomPropertiesScript;
 
 	void Start(){
@@ -32,7 +31,7 @@ public class LevelOneBond : MouseDrag {
     void Bond(Collider2D otherAtomCollider) {
 
         // Prevent bonding when the user is not dragging an atom and when he makes a wrong bonding
-        if (draggedAtom == null || isBondingFailed == true)
+        if (draggedAtom == null)
             return;
 
         GameObject collidedAtom = otherAtomCollider.GetComponent<Collider2D>().gameObject;
@@ -53,7 +52,6 @@ public class LevelOneBond : MouseDrag {
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomLinearOffset;
                         TriggerShellRotation(collidedAtom, draggedAtom);
-                        isBondingFailed = true;
                     }
 					atomPropertiesScript.hydrogenAtomListStates [0] = LevelOneAtomProperties.AtomBondingState.Failed;
 					atomPropertiesScript.hydrogenAtomListStates [1] = LevelOneAtomProperties.AtomBondingState.Failed;
@@ -71,7 +69,6 @@ public class LevelOneBond : MouseDrag {
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
                         collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomLinearOffset;
                         TriggerShellRotation(collidedAtom, draggedAtom);
-                        isBondingFailed = true;
                     }
 					atomPropertiesScript.hydrogenAtomListStates [0] = LevelOneAtomProperties.AtomBondingState.Failed;
 					atomPropertiesScript.hydrogenAtomListStates [1] = LevelOneAtomProperties.AtomBondingState.Failed;
