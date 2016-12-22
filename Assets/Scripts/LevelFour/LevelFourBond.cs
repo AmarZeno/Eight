@@ -13,6 +13,9 @@ public class LevelFourBond : MouseDrag {
     Vector3 hydrogenShellFacingDown;
     Vector3 hydrogenShellFacingUp;
 
+    public GameObject firstCarbonAtom;
+    public GameObject secondCarbonAtom;
+
     // Variables
     public GameObject atomProperties;
 
@@ -66,7 +69,7 @@ public class LevelFourBond : MouseDrag {
 				if (atomPropertiesScript.hydrogenAtomStateList[0] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[0] == LevelFourAtomProperties.AtomBondingState.Failed)
                         break;
 
-                    if (draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4")
+                    if (draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4" || draggedAtom.name == "Hydrogen5" || draggedAtom.name == "Hydrogen6")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
@@ -77,6 +80,7 @@ public class LevelFourBond : MouseDrag {
 				    	atomPropertiesScript.hydrogenAtomStateList [0] = LevelFourAtomProperties.AtomBondingState.Failed;
 					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+                        collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     }
                     else if (draggedAtom.name == "Carbon1") {
                         // Break if first carbon has completed its bonds
@@ -86,8 +90,15 @@ public class LevelFourBond : MouseDrag {
                         }
                         MakeSuccessfulBond(draggedAtom, collidedAtom);
                     }
-                    // Enable bonding joint for colliding with any type of atom
-                    collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    else if (draggedAtom.name == "Carbon2")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.secondCarbonSuccessBonds == 6)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
 					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 }
                 break;
@@ -97,7 +108,7 @@ public class LevelFourBond : MouseDrag {
 				if (atomPropertiesScript.hydrogenAtomStateList[1] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[1] == LevelFourAtomProperties.AtomBondingState.Failed)
 						break;
 
-                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4")
+                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4" || draggedAtom.name == "Hydrogen5" || draggedAtom.name == "Hydrogen6")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
@@ -107,6 +118,7 @@ public class LevelFourBond : MouseDrag {
 						atomPropertiesScript.hydrogenAtomStateList [1] = LevelFourAtomProperties.AtomBondingState.Failed;
 						atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+                        collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -117,8 +129,15 @@ public class LevelFourBond : MouseDrag {
                         }
                         MakeSuccessfulBond(draggedAtom, collidedAtom);
                     }
-                    // Enable bonding joint for colliding with any type of atom
-                    collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    else if (draggedAtom.name == "Carbon2")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.secondCarbonSuccessBonds == 6)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
 					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 }
                 break;
@@ -128,7 +147,7 @@ public class LevelFourBond : MouseDrag {
 				if (atomPropertiesScript.hydrogenAtomStateList[2] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[2] == LevelFourAtomProperties.AtomBondingState.Failed)
 						break;
 
-                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen4")
+                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen4" || draggedAtom.name == "Hydrogen5" || draggedAtom.name == "Hydrogen6")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
@@ -138,6 +157,7 @@ public class LevelFourBond : MouseDrag {
 					    atomPropertiesScript.hydrogenAtomStateList [2] = LevelFourAtomProperties.AtomBondingState.Failed;
 					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+                        collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -148,8 +168,15 @@ public class LevelFourBond : MouseDrag {
                         }
                         MakeSuccessfulBond(draggedAtom, collidedAtom);
                     }
-                    // Enable bonding joint for colliding with any type of atom
-                    collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    else if (draggedAtom.name == "Carbon2")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.secondCarbonSuccessBonds == 6)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
 					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
                 }
                 break;
@@ -159,7 +186,7 @@ public class LevelFourBond : MouseDrag {
 				if (atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Failed)
 						break;
 
-                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3")
+                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen5" || draggedAtom.name == "Hydrogen6")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
@@ -169,6 +196,7 @@ public class LevelFourBond : MouseDrag {
 					    atomPropertiesScript.hydrogenAtomStateList [3] = LevelFourAtomProperties.AtomBondingState.Failed;
 					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+                        collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -179,15 +207,103 @@ public class LevelFourBond : MouseDrag {
                         }
                         MakeSuccessfulBond(draggedAtom, collidedAtom);
                     }
-                    // Enable bonding joint for colliding with any type of atom
-                    collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    else if (draggedAtom.name == "Carbon2")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.secondCarbonSuccessBonds == 6)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
 					collidedAtom.GetComponent<LevelFourBond> ().enabled = false;
+                }
+                break;
+            case "Hydrogen5":
+                {
+                    // Break if already made a succesful bond
+                    if (atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Failed)
+                        break;
+
+                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4" || draggedAtom.name == "Hydrogen6")
+                    {
+                        if (CanDraggedAtomBond() == false)
+                        {
+                            break;
+                        }
+                        collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
+                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
+                        atomPropertiesScript.hydrogenAtomStateList[3] = LevelFourAtomProperties.AtomBondingState.Failed;
+                        atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
+                        collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    }
+                    else if (draggedAtom.name == "Carbon1")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.firstCarbonSuccessBonds == 3)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
+                    else if (draggedAtom.name == "Carbon2")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.secondCarbonSuccessBonds == 6)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
+                    collidedAtom.GetComponent<LevelFourBond>().enabled = false;
+                }
+                break;
+            case "Hydrogen6":
+                {
+                    // Break if already made a succesful bond
+                    if (atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == LevelFourAtomProperties.AtomBondingState.Failed)
+                        break;
+
+                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4" || draggedAtom.name == "Hydrogen5")
+                    {
+                        if (CanDraggedAtomBond() == false)
+                        {
+                            break;
+                        }
+                        collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
+                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
+                        atomPropertiesScript.hydrogenAtomStateList[3] = LevelFourAtomProperties.AtomBondingState.Failed;
+                        atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
+                        TriggerShellRotation(collidedAtom, draggedAtom);
+                        collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                    }
+                    else if (draggedAtom.name == "Carbon1")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.firstCarbonSuccessBonds == 3)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
+                    else if (draggedAtom.name == "Carbon2")
+                    {
+                        // Break if first carbon has completed its bonds
+                        if (atomPropertiesScript.secondCarbonSuccessBonds == 6)
+                        {
+                            break;
+                        }
+                        MakeSuccessfulBond(draggedAtom, collidedAtom);
+                    }
+                    collidedAtom.GetComponent<LevelFourBond>().enabled = false;
                 }
                 break;
             case "Carbon1":
                 if (draggedAtom.name == "Carbon2")
                 {
-
+                    // Enable carbon1 joint
+                    collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                 }
                 else
                 {
@@ -195,7 +311,24 @@ public class LevelFourBond : MouseDrag {
                     if (atomPropertiesScript.firstCarbonSuccessBonds == 3) {
                         break;
                     }
+                    draggedAtom.GetComponent<LevelFourBond>().enabled = false;
+                    // Inverse the params
+                    MakeSuccessfulBond(collidedAtom, draggedAtom);
+                }
+                break;
+            case "Carbon2":
+                if (draggedAtom.name == "Carbon1")
+                {
+                    // Enable carbon1 joint
                     draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+                }
+                else
+                {
+                    // Break if first carbon has completed its bonds
+                    if (atomPropertiesScript.secondCarbonSuccessBonds == 6)
+                    {
+                        break;
+                    }
                     draggedAtom.GetComponent<LevelFourBond>().enabled = false;
                     // Inverse the params
                     MakeSuccessfulBond(collidedAtom, draggedAtom);
@@ -213,12 +346,16 @@ public class LevelFourBond : MouseDrag {
     public void MakeSuccessfulBond(GameObject draggedAtom, GameObject collidedAtom) {
         if (draggedAtom.name == "Carbon1")
         {
+            collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = firstCarbonAtom.GetComponent<Rigidbody2D>();
+            collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
             atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(collidedAtom.name[collidedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Successful;
             collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = atomPropertiesScript.hydrogenLinearOffsets[atomPropertiesScript.firstCarbonSuccessBonds];
             collidedAtom.transform.GetChild(2).localEulerAngles = atomPropertiesScript.hydrogenShellRotations[atomPropertiesScript.firstCarbonSuccessBonds];
             atomPropertiesScript.firstCarbonSuccessBonds = atomPropertiesScript.firstCarbonSuccessBonds + 1;
         }
         else if (draggedAtom.name == "Carbon2") {
+            collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = secondCarbonAtom.GetComponent<Rigidbody2D>();
+            collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
             atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(collidedAtom.name[collidedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Successful;
             collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = atomPropertiesScript.hydrogenLinearOffsets[atomPropertiesScript.secondCarbonSuccessBonds];
             collidedAtom.transform.GetChild(2).localEulerAngles = atomPropertiesScript.hydrogenShellRotations[atomPropertiesScript.secondCarbonSuccessBonds];
