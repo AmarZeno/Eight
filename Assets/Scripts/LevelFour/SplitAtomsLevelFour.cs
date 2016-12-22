@@ -34,6 +34,7 @@ public class SplitAtomsLevelFour : MonoBehaviour
     void Start()
     {
         atomPropertiesScript = atomProperties.GetComponent<LevelFourAtomProperties>();
+
         hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
         hydrogenFour.GetComponent<MouseDrag>().enabled = false;
 
@@ -162,9 +163,9 @@ public class SplitAtomsLevelFour : MonoBehaviour
         AssociateDefaultPositions(connectedGameObject);
 
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
-        tappedGameObject.GetComponent<LevelThreeBond>().enabled = true;
+        tappedGameObject.GetComponent<LevelFourBond>().enabled = true;
         connectedGameObject.GetComponent<MouseDrag>().enabled = true;
-        connectedGameObject.GetComponent<LevelThreeBond>().enabled = true;
+        connectedGameObject.GetComponent<LevelFourBond>().enabled = true;
         tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
         connectedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
     }
