@@ -34,8 +34,6 @@ public class SplitAtomsLevelTwo : MonoBehaviour
     void Start()
     {
         atomPropertiesScript = atomProperties.GetComponent<LevelTwoAtomProperties>();
-        fluorineTwo.GetComponent<MouseDrag>().enabled = false;
-        fluorineFour.GetComponent<MouseDrag>().enabled = false;
 
         fluorineTwoDefaultLinearOffset = fluorineTwo.GetComponent<RelativeJoint2D>().linearOffset;
         fluorineOneDefaultLinearOffset = fluorineOne.GetComponent<RelativeJoint2D>().linearOffset;

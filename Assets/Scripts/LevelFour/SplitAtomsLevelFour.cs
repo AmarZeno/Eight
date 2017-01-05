@@ -26,10 +26,6 @@ public class SplitAtomsLevelFour : MonoBehaviour
     void Start()
     {
         atomPropertiesScript = atomProperties.GetComponent<LevelFourAtomProperties>();
-
-        hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
-        hydrogenFour.GetComponent<MouseDrag>().enabled = false;
-
     }
 
     // Update is called once per frame
