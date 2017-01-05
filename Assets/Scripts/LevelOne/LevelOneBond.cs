@@ -14,6 +14,13 @@ public class LevelOneBond : MouseDrag {
     private GameObject draggedAtom;
 	private LevelOneAtomProperties atomPropertiesScript;
 
+    // Particle effects
+
+    public ParticleSystem hydrogenOneSuccessParticleEffect;
+    public ParticleSystem hydrogenTwoSuccessParticleEffect;
+    public ParticleSystem oxygenSuccessParticleEffect;
+    public ParticleSystem hydrogenOneWrongParticleEffect;
+    public ParticleSystem hydrogenTwoWrongParticleEffect;
     public GameObject finisherParticleSystem;
 
     void Start(){
@@ -56,10 +63,18 @@ public class LevelOneBond : MouseDrag {
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         atomPropertiesScript.hydrogenAtomListStates[0] = LevelOneAtomProperties.AtomBondingState.Failed;
                         atomPropertiesScript.hydrogenAtomListStates[1] = LevelOneAtomProperties.AtomBondingState.Failed;
+
+                        // Trigger failure particle effects for the involved atoms
+                        hydrogenOneWrongParticleEffect.Play();
+                        hydrogenTwoWrongParticleEffect.Play();
                     }
                     else {
                         // Make collided element state success
                         atomPropertiesScript.hydrogenAtomListStates[0] = LevelOneAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        hydrogenOneSuccessParticleEffect.Play();
+                        oxygenSuccessParticleEffect.Play();
                     }
 					
                     // Enable bonding joint for colliding with any type of atom
@@ -78,10 +93,18 @@ public class LevelOneBond : MouseDrag {
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         atomPropertiesScript.hydrogenAtomListStates[0] = LevelOneAtomProperties.AtomBondingState.Failed;
                         atomPropertiesScript.hydrogenAtomListStates[1] = LevelOneAtomProperties.AtomBondingState.Failed;
+
+                        // Trigger failure particle effects for the involved atoms
+                        hydrogenOneWrongParticleEffect.Play();
+                        hydrogenTwoWrongParticleEffect.Play();
                     }
                     else {
                         // Make collided element state success
                         atomPropertiesScript.hydrogenAtomListStates[1] = LevelOneAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        hydrogenTwoSuccessParticleEffect.Play();
+                        oxygenSuccessParticleEffect.Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -90,6 +113,15 @@ public class LevelOneBond : MouseDrag {
             case "Oxygen":
                 draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                 atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] = LevelOneAtomProperties.AtomBondingState.Successful;
+                if (draggedAtom.name == "Hydrogen1") {
+                    // Trigger success particle effects for the involved atoms
+                    hydrogenOneSuccessParticleEffect.Play();
+                    oxygenSuccessParticleEffect.Play();
+                } else if (draggedAtom.name == "Hydrogen2") {
+                    // Trigger success particle effects for the involved atoms
+                    hydrogenTwoSuccessParticleEffect.Play();
+                    oxygenSuccessParticleEffect.Play();
+                }
                 break;
             default:
                 // Do nothing
@@ -130,7 +162,7 @@ public class LevelOneBond : MouseDrag {
     }
 
     IEnumerator ProceedToNextLevel() {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         SceneManager.LoadScene(2);
     }
 }

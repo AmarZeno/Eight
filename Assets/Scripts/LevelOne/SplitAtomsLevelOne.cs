@@ -86,6 +86,7 @@ public class SplitAtomsLevelOne : MonoBehaviour {
 
                 List<RaycastResult> raycastResults = new List<RaycastResult>();
                 EventSystem.current.RaycastAll(pointer, raycastResults);
+
                 if (raycastResults.Count > 0)
                 {
                     GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
@@ -120,15 +121,25 @@ public class SplitAtomsLevelOne : MonoBehaviour {
                     }
                 }
             }
-        }
+         }
     }
 
     void SplitAtom(GameObject tappedGameObject)
     {
         GameObject connectedGameObject = tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody.gameObject;
         tappedGameObject.GetComponent<RelativeJoint2D>().enabled = false;
-        tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y + 50, tappedGameObject.transform.localPosition.z);
-        connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y - 50, connectedGameObject.transform.localPosition.z);
+
+        if (tappedGameObject.transform.localPosition.y > connectedGameObject.transform.localPosition.y)
+        { // If tappedObject is on top
+            tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y + 50, tappedGameObject.transform.localPosition.z);
+            connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y - 50, connectedGameObject.transform.localPosition.z);
+        }
+        else
+        {
+            tappedGameObject.transform.localPosition = new Vector3(tappedGameObject.transform.localPosition.x, tappedGameObject.transform.localPosition.y - 50, tappedGameObject.transform.localPosition.z);
+            connectedGameObject.transform.localPosition = new Vector3(connectedGameObject.transform.localPosition.x, connectedGameObject.transform.localPosition.y + 50, connectedGameObject.transform.localPosition.z);
+        }
+
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
         tappedGameObject.GetComponent<LevelOneBond>().enabled = true;
         connectedGameObject.GetComponent<MouseDrag>().enabled = true;
