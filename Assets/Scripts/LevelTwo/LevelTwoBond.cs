@@ -16,6 +16,12 @@ public class LevelTwoBond : MouseDrag {
     private GameObject draggedAtom = null;
     private LevelTwoAtomProperties atomPropertiesScript;
 
+
+    // Particle effects
+
+    public ParticleSystem[] successParticleEffects;
+    public ParticleSystem[] failureParticleEffects;
+
     public GameObject finisherParticleSystem;
 
     void Start() {
@@ -63,9 +69,17 @@ public class LevelTwoBond : MouseDrag {
 						atomPropertiesScript.flourineAtomListStates [0] = LevelTwoAtomProperties.AtomBondingState.Failed;
 						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[0].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
 						atomPropertiesScript.flourineAtomListStates [0] = LevelTwoAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[0].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -88,9 +102,17 @@ public class LevelTwoBond : MouseDrag {
 						atomPropertiesScript.flourineAtomListStates [1] = LevelTwoAtomProperties.AtomBondingState.Failed;
 						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[1].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
 						atomPropertiesScript.flourineAtomListStates [1] = LevelTwoAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[1].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -113,9 +135,17 @@ public class LevelTwoBond : MouseDrag {
 						atomPropertiesScript.flourineAtomListStates [2] = LevelTwoAtomProperties.AtomBondingState.Failed;
 						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[2].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
 						atomPropertiesScript.flourineAtomListStates [2] = LevelTwoAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[2].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -138,9 +168,17 @@ public class LevelTwoBond : MouseDrag {
 						atomPropertiesScript.flourineAtomListStates [3] = LevelTwoAtomProperties.AtomBondingState.Failed;
 						atomPropertiesScript.flourineAtomListStates [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[3].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
 						atomPropertiesScript.flourineAtomListStates [3] = LevelTwoAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[3].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -166,6 +204,10 @@ public class LevelTwoBond : MouseDrag {
                     default:
                         break;
                 }
+
+                // Trigger success particle effects for the involved atoms
+                successParticleEffects[4].Play();
+                successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                 break;
             default:
                 // Do nothing
