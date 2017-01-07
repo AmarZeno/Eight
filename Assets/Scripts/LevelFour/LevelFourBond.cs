@@ -22,6 +22,11 @@ public class LevelFourBond : MouseDrag {
     private GameObject draggedAtom = null;
     private LevelFourAtomProperties atomPropertiesScript;
 
+    // Particle effects
+
+    public ParticleSystem[] successParticleEffects;
+    public ParticleSystem[] failureParticleEffects;
+
     public GameObject firstFinisherParticleSystem;
     public GameObject secondFinisherParticleSystem;
 
@@ -82,6 +87,10 @@ public class LevelFourBond : MouseDrag {
 					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[0].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else if (draggedAtom.name == "Carbon1") {
                         // Break if first carbon has completed its bonds
@@ -120,6 +129,10 @@ public class LevelFourBond : MouseDrag {
 						atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[1].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -159,6 +172,10 @@ public class LevelFourBond : MouseDrag {
 					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[2].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -198,6 +215,10 @@ public class LevelFourBond : MouseDrag {
 					    atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[3].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -238,6 +259,10 @@ public class LevelFourBond : MouseDrag {
                         atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[4].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -278,6 +303,10 @@ public class LevelFourBond : MouseDrag {
                         atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] = LevelFourAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
                         collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[5].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else if (draggedAtom.name == "Carbon1")
                     {
@@ -364,6 +393,11 @@ public class LevelFourBond : MouseDrag {
             collidedAtom.transform.GetChild(2).localEulerAngles = atomPropertiesScript.hydrogenShellRotations[atomPropertiesScript.secondCarbonSuccessBonds];
             atomPropertiesScript.secondCarbonSuccessBonds = atomPropertiesScript.secondCarbonSuccessBonds + 1;
         }
+
+        // Trigger success particle effects for the involved atoms
+        successParticleEffects[(Convert.ToInt32(collidedAtom.name[collidedAtom.name.Length - 1].ToString()) - 1)].Play();
+        // Add 6 to offset the six hydrogen atoms in the array
+        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1 + 6)].Play();
     }
 
     public void TriggerShellRotation(GameObject collidedAtom, GameObject draggedAtom)

@@ -19,6 +19,11 @@ public class LevelThreeBond : MouseDrag {
     private GameObject draggedAtom = null;
     private LevelThreeAtomProperties atomPropertiesScript;
 
+    // Particle effects
+
+    public ParticleSystem[] successParticleEffects;
+    public ParticleSystem[] failureParticleEffects;
+
     public GameObject finisherParticleSystem;
 
     void Start() {
@@ -77,9 +82,17 @@ public class LevelThreeBond : MouseDrag {
 				    	atomPropertiesScript.hydrogenAtomStateList[0] = LevelThreeAtomProperties.AtomBondingState.Failed;
 					    atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[0].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
 					    atomPropertiesScript.hydrogenAtomStateList[0] = LevelThreeAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[0].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -102,9 +115,17 @@ public class LevelThreeBond : MouseDrag {
 						atomPropertiesScript.hydrogenAtomStateList [1] = LevelThreeAtomProperties.AtomBondingState.Failed;
 						atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[1].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
 					    atomPropertiesScript.hydrogenAtomStateList [1] = LevelThreeAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[1].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -127,9 +148,18 @@ public class LevelThreeBond : MouseDrag {
 					    atomPropertiesScript.hydrogenAtomStateList[2] = LevelThreeAtomProperties.AtomBondingState.Failed;
 					    atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[2].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+
                     }
                     else {
 				    	atomPropertiesScript.hydrogenAtomStateList[2] = LevelThreeAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[2].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -152,9 +182,18 @@ public class LevelThreeBond : MouseDrag {
 					    atomPropertiesScript.hydrogenAtomStateList[3] = LevelThreeAtomProperties.AtomBondingState.Failed;
 					    atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = LevelThreeAtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
+
+                        // Trigger failure particle effects for the involved atoms
+                        failureParticleEffects[3].Play();
+                        failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+
                     }
                     else {
-					atomPropertiesScript.hydrogenAtomStateList[3] = LevelThreeAtomProperties.AtomBondingState.Successful;
+					    atomPropertiesScript.hydrogenAtomStateList[3] = LevelThreeAtomProperties.AtomBondingState.Successful;
+
+                        // Trigger success particle effects for the involved atoms
+                        successParticleEffects[3].Play();
+                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -180,6 +219,9 @@ public class LevelThreeBond : MouseDrag {
                     default:
                         break;
                 }
+                // Trigger success particle effects for the involved atoms
+                successParticleEffects[4].Play();
+                successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                 break;
             default:
                 // Do nothing
@@ -222,7 +264,7 @@ public class LevelThreeBond : MouseDrag {
 
     IEnumerator ProceedToNextLevel()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
        SceneManager.LoadScene(4);
     }
 }
