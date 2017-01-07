@@ -266,7 +266,7 @@ public class LevelTwoBond : MouseDrag {
 
     IEnumerator ProceedToNextLevel()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         SceneManager.LoadScene(3);
     }
 
