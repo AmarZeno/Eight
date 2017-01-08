@@ -182,6 +182,7 @@ public class SplitAtomsLevelTwo : MonoBehaviour
         AssociateDefaultPositions(tappedGameObject);
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
         tappedGameObject.GetComponent<LevelTwoBond>().enabled = true;
+        atomPropertiesScript.flourineAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = LevelTwoAtomProperties.AtomBondingState.Unknown;
     }
 
     void SplitAtom(GameObject tappedGameObject) {
