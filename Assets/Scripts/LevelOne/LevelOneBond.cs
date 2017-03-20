@@ -22,6 +22,7 @@ public class LevelOneBond : MouseDrag {
     public ParticleSystem hydrogenOneWrongParticleEffect;
     public ParticleSystem hydrogenTwoWrongParticleEffect;
     public GameObject finisherParticleSystem;
+    public GameObject mainCanvas;
 
     void Start(){
         atomPropertiesScript = atomProperties.GetComponent<LevelOneAtomProperties>();
@@ -157,12 +158,7 @@ public class LevelOneBond : MouseDrag {
             {
                 finisherParticleSystem.SetActive(true);
             }
-            StartCoroutine(ProceedToNextLevel());
+            mainCanvas.GetComponent<EightSceneManager>().StageComplete();
         }
-    }
-
-    IEnumerator ProceedToNextLevel() {
-        yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene(2);
     }
 }
