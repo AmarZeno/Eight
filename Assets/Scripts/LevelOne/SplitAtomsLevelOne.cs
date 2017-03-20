@@ -21,10 +21,10 @@ public class SplitAtomsLevelOne : MonoBehaviour {
     // Use this for initialization
     void Start () {
         atomPropertiesScript = atomProperties.GetComponent<LevelOneAtomProperties>();
-        hydrogenOneDefaultLinearOffset = new Vector2(-14, -8);
-        hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, 120);
-        hydrogenTwoDefaultLinearOffset = new Vector2(14, -8);
-        hydrogenTwoDefaultShellEulerValues = new Vector3(0, 0, -120);
+        hydrogenOneDefaultLinearOffset = new Vector2(-12, -7.5f);
+        hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, 110);
+        hydrogenTwoDefaultLinearOffset = new Vector2(12, -7.5f);
+        hydrogenTwoDefaultShellEulerValues = new Vector3(0, 0, -110);
     }
 
     // Update is called once per frame
@@ -195,6 +195,7 @@ public class SplitAtomsLevelOne : MonoBehaviour {
         tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = oxygen.GetComponent<Rigidbody2D>();
         AssociateDefaultPositions(tappedGameObject);
         AssociateDefaultPositions(connectedGameObject);
+        atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = LevelOneAtomProperties.AtomBondingState.Unknown;
     }
 
     void AssociateDefaultPositions(GameObject gameObject)
