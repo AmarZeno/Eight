@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SplitAtomsLevelOne : MonoBehaviour {
+public class H2OSplitAtoms : MonoBehaviour {
 
     public GameObject atomProperties;
-    private LevelOneAtomProperties atomPropertiesScript;
+    private H2OAtomProperties atomPropertiesScript;
 
     public GameObject[] hydrogenList;
     public GameObject oxygen;
@@ -20,7 +20,7 @@ public class SplitAtomsLevelOne : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        atomPropertiesScript = atomProperties.GetComponent<LevelOneAtomProperties>();
+        atomPropertiesScript = atomProperties.GetComponent<H2OAtomProperties>();
         hydrogenOneDefaultLinearOffset = new Vector2(-12, -7.5f);
         hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, 110);
         hydrogenTwoDefaultLinearOffset = new Vector2(12, -7.5f);
@@ -44,10 +44,10 @@ public class SplitAtomsLevelOne : MonoBehaviour {
             {
                 GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
 
-                LevelOneAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
+                H2OAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
                 // Prevent splitting for unknown states
-                if (state == LevelOneAtomProperties.AtomBondingState.Unknown)
+                if (state == H2OAtomProperties.AtomBondingState.Unknown)
                 {
                     return;
                 }
@@ -57,7 +57,7 @@ public class SplitAtomsLevelOne : MonoBehaviour {
                     if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
                     {
                         // If the tapped gameobject has an enabled Joint then continue splitting that Atom
-                        if (state == LevelOneAtomProperties.AtomBondingState.Successful) // Split success bonds
+                        if (state == H2OAtomProperties.AtomBondingState.Successful) // Split success bonds
                         {
                             SplitSuccessBond(tappedGameObject);
                         }
@@ -98,10 +98,10 @@ public class SplitAtomsLevelOne : MonoBehaviour {
                 {
                     GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
 
-                    LevelOneAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
+                    H2OAtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
                     // Prevent splitting for unknown states
-                    if (state == LevelOneAtomProperties.AtomBondingState.Unknown)
+                    if (state == H2OAtomProperties.AtomBondingState.Unknown)
                     {
                         return;
                     }
@@ -111,7 +111,7 @@ public class SplitAtomsLevelOne : MonoBehaviour {
                         if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
                         {
                             // If the tapped gameobject has an enabled Joint then continue splitting that Atom
-                            if (state == LevelOneAtomProperties.AtomBondingState.Successful) // Split success bonds
+                            if (state == H2OAtomProperties.AtomBondingState.Successful) // Split success bonds
                             {
                                 SplitSuccessBond(tappedGameObject);
                             }
@@ -167,9 +167,9 @@ public class SplitAtomsLevelOne : MonoBehaviour {
         }
         
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
-        tappedGameObject.GetComponent<LevelOneBond>().enabled = true;
+        tappedGameObject.GetComponent<H2OBond>().enabled = true;
         AssociateDefaultPositions(tappedGameObject);
-        atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = LevelOneAtomProperties.AtomBondingState.Unknown;
+        atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = H2OAtomProperties.AtomBondingState.Unknown;
     }
 
     void SplitAtom(GameObject tappedGameObject)
@@ -189,13 +189,13 @@ public class SplitAtomsLevelOne : MonoBehaviour {
         }
 
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
-        tappedGameObject.GetComponent<LevelOneBond>().enabled = true;
+        tappedGameObject.GetComponent<H2OBond>().enabled = true;
         connectedGameObject.GetComponent<MouseDrag>().enabled = true;
-        connectedGameObject.GetComponent<LevelOneBond>().enabled = true;
+        connectedGameObject.GetComponent<H2OBond>().enabled = true;
         tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = oxygen.GetComponent<Rigidbody2D>();
         AssociateDefaultPositions(tappedGameObject);
         AssociateDefaultPositions(connectedGameObject);
-        atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = LevelOneAtomProperties.AtomBondingState.Unknown;
+        atomPropertiesScript.hydrogenAtomListStates[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = H2OAtomProperties.AtomBondingState.Unknown;
     }
 
     void AssociateDefaultPositions(GameObject gameObject)
@@ -204,13 +204,13 @@ public class SplitAtomsLevelOne : MonoBehaviour {
         {
             gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenOneDefaultLinearOffset;
             gameObject.transform.GetChild(2).localEulerAngles = hydrogenOneDefaultShellEulerValues;
-            atomPropertiesScript.hydrogenAtomListStates[0] = LevelOneAtomProperties.AtomBondingState.Unknown;
+            atomPropertiesScript.hydrogenAtomListStates[0] = H2OAtomProperties.AtomBondingState.Unknown;
         }
         else if (gameObject.name == "Hydrogen2")
         {
             gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenTwoDefaultLinearOffset;
             gameObject.transform.GetChild(2).localEulerAngles = hydrogenTwoDefaultShellEulerValues;
-            atomPropertiesScript.hydrogenAtomListStates[1] = LevelOneAtomProperties.AtomBondingState.Unknown;
+            atomPropertiesScript.hydrogenAtomListStates[1] = H2OAtomProperties.AtomBondingState.Unknown;
         }
     }
 }
