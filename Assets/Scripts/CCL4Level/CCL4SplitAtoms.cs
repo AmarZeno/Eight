@@ -37,15 +37,15 @@ public class CCL4SplitAtoms : MonoBehaviour
         hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
         hydrogenFour.GetComponent<MouseDrag>().enabled = false;
 
-        hydrogenTwoDefaultLinearOffset = new Vector2(-16, -4);
+        hydrogenTwoDefaultLinearOffset = hydrogenTwo.GetComponent<RelativeJoint2D>().linearOffset;
         hydrogenOneDefaultLinearOffset = hydrogenOne.GetComponent<RelativeJoint2D>().linearOffset;
         hydrogenThreeDefaultLinearOffset = hydrogenThree.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenFourDefaultLinearOffset = new Vector2(0, -17);
+        hydrogenFourDefaultLinearOffset = hydrogenFour.GetComponent<RelativeJoint2D>().linearOffset;
 
-        hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, 240);
-        hydrogenTwoDefaultShellEulerValues = new Vector3(0, 0, 120);
-        hydrogenThreeDefaultShellEulerValues = new Vector3(0, 0, 0);
-        hydrogenFourDefaultShellEulerValues = new Vector3(0, 0, 180);
+        hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, -16);
+        hydrogenTwoDefaultShellEulerValues = new Vector3(0, 0, 182);
+        hydrogenThreeDefaultShellEulerValues = new Vector3(0, 0, 86);
+        hydrogenFourDefaultShellEulerValues = new Vector3(0, 0, 262);
     }
 
     // Update is called once per frame
