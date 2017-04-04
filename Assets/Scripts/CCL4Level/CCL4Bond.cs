@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 public class CCL4Bond : MouseDrag {
 	//TODO Replace AtomProperties
     // Constants
-    Vector2 hydrogenAtomOverridenLinearOffset;
+    Vector2 chlorineAtomOverridenLinearOffset;
 
-    Vector3 hydrogenShellFacingDown;
-    Vector3 hydrogenShellFacingUp;
+    Vector3 chlorineShellFacingDown;
+    Vector3 chlorineShellFacingUp;
 
     // Variables
     public GameObject atomProperties;
@@ -29,10 +29,10 @@ public class CCL4Bond : MouseDrag {
     void Start() {
 		atomPropertiesScript = atomProperties.GetComponent<CCL4AtomProperties>();
 
-        hydrogenAtomOverridenLinearOffset = new Vector2(0, -15);
+        chlorineAtomOverridenLinearOffset = new Vector2(0, -15);
 
-        hydrogenShellFacingUp = new Vector3(0, 0, 0);
-        hydrogenShellFacingDown = new Vector3(0, 0, 180);
+        chlorineShellFacingUp = new Vector3(0, 0, 0);
+        chlorineShellFacingDown = new Vector3(0, 0, 180);
     }
 
     public override void OnDrag(PointerEventData eventData)
@@ -59,28 +59,28 @@ public class CCL4Bond : MouseDrag {
         GameObject collidedAtom = otherAtomCollider.GetComponent<Collider2D>().gameObject;
 
         // Handle five collision cases
-        // 1) When the dragged atom collides with Hydrogen1 atom
-        // 2) When the dragged atom collides with Hydrogen2 atom
-        // 3) When the dragged atom collides with Hydrogen3 atom
-        // 4) When the dragged atom collides with Hydrogen4 atom
+        // 1) When the dragged atom collides with Chlorine1 atom
+        // 2) When the dragged atom collides with Chlorine2 atom
+        // 3) When the dragged atom collides with Chlorine3 atom
+        // 4) When the dragged atom collides with Chlorine4 atom
         // 5) When the dragged atom collides with Carbon atom
         switch (collidedAtom.name) {
-            case "Hydrogen1":
+            case "Chlorine1":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[0] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[0] == CCL4AtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.chlorineAtomStateList[0] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.chlorineAtomStateList[0] == CCL4AtomProperties.AtomBondingState.Failed)
                         break;
 
-                    if (draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4")
+                    if (draggedAtom.name == "Chlorine2" || draggedAtom.name == "Chlorine3" || draggedAtom.name == "Chlorine4")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
 						}
 
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
-                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-				    	atomPropertiesScript.hydrogenAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Failed;
-					    atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
+                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = chlorineAtomOverridenLinearOffset;
+				    	atomPropertiesScript.chlorineAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
 
                         // Trigger failure particle effects for the involved atoms
@@ -88,7 +88,7 @@ public class CCL4Bond : MouseDrag {
                         failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
-					    atomPropertiesScript.hydrogenAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Successful;
+					    atomPropertiesScript.chlorineAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Successful;
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[0].Play();
@@ -99,21 +99,21 @@ public class CCL4Bond : MouseDrag {
 					collidedAtom.GetComponent<CCL4Bond> ().enabled = false;
                 }
                 break;
-            case "Hydrogen2":
+            case "Chlorine2":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[1] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[1] == CCL4AtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.chlorineAtomStateList[1] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.chlorineAtomStateList[1] == CCL4AtomProperties.AtomBondingState.Failed)
 						break;
 
-                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen3" || draggedAtom.name == "Hydrogen4")
+                    if (draggedAtom.name == "Chlorine1" || draggedAtom.name == "Chlorine3" || draggedAtom.name == "Chlorine4")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
-                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-						atomPropertiesScript.hydrogenAtomStateList [1] = CCL4AtomProperties.AtomBondingState.Failed;
-						atomPropertiesScript.hydrogenAtomStateList [(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
+                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = chlorineAtomOverridenLinearOffset;
+						atomPropertiesScript.chlorineAtomStateList[1] = CCL4AtomProperties.AtomBondingState.Failed;
+						atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
 
                         // Trigger failure particle effects for the involved atoms
@@ -121,7 +121,7 @@ public class CCL4Bond : MouseDrag {
                         failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                     else {
-					    atomPropertiesScript.hydrogenAtomStateList [1] = CCL4AtomProperties.AtomBondingState.Successful;
+					    atomPropertiesScript.chlorineAtomStateList[1] = CCL4AtomProperties.AtomBondingState.Successful;
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[1].Play();
@@ -132,21 +132,21 @@ public class CCL4Bond : MouseDrag {
 					collidedAtom.GetComponent<CCL4Bond> ().enabled = false;
                 }
                 break;
-            case "Hydrogen3":
+            case "Chlorine3":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[2] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[2] == CCL4AtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.chlorineAtomStateList[2] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.chlorineAtomStateList[2] == CCL4AtomProperties.AtomBondingState.Failed)
 						break;
 
-                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen4")
+                    if (draggedAtom.name == "Chlorine1" || draggedAtom.name == "Chlorine2" || draggedAtom.name == "Chlorine4")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
-                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-					    atomPropertiesScript.hydrogenAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Failed;
-					    atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
+                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = chlorineAtomOverridenLinearOffset;
+					    atomPropertiesScript.chlorineAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
 
                         // Trigger failure particle effects for the involved atoms
@@ -155,7 +155,7 @@ public class CCL4Bond : MouseDrag {
 
                     }
                     else {
-				    	atomPropertiesScript.hydrogenAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Successful;
+				    	atomPropertiesScript.chlorineAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Successful;
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[2].Play();
@@ -166,21 +166,21 @@ public class CCL4Bond : MouseDrag {
 					collidedAtom.GetComponent<CCL4Bond> ().enabled = false;
                 }
                 break;
-            case "Hydrogen4":
+            case "Chlorine4":
                 {
                     // Break if already made a succesful bond
-				if (atomPropertiesScript.hydrogenAtomStateList[3] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == CCL4AtomProperties.AtomBondingState.Failed)
+				if (atomPropertiesScript.chlorineAtomStateList[3] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.chlorineAtomStateList[3] == CCL4AtomProperties.AtomBondingState.Failed)
 						break;
 
-                    if (draggedAtom.name == "Hydrogen1" || draggedAtom.name == "Hydrogen2" || draggedAtom.name == "Hydrogen3")
+                    if (draggedAtom.name == "Chlorine1" || draggedAtom.name == "Chlorine2" || draggedAtom.name == "Chlorine3")
                     {
 						if (CanDraggedAtomBond () == false) {
 							break;
 						}
                         collidedAtom.GetComponent<RelativeJoint2D>().connectedBody = draggedAtom.GetComponent<Rigidbody2D>();
-                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = hydrogenAtomOverridenLinearOffset;
-					    atomPropertiesScript.hydrogenAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Failed;
-					    atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
+                        collidedAtom.GetComponent<RelativeJoint2D>().linearOffset = chlorineAtomOverridenLinearOffset;
+					    atomPropertiesScript.chlorineAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Failed;
+					    atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(draggedAtom.name [draggedAtom.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Failed;
                         TriggerShellRotation(collidedAtom, draggedAtom);
 
                         // Trigger failure particle effects for the involved atoms
@@ -189,7 +189,7 @@ public class CCL4Bond : MouseDrag {
 
                     }
                     else {
-					    atomPropertiesScript.hydrogenAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Successful;
+					    atomPropertiesScript.chlorineAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Successful;
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[3].Play();
@@ -204,17 +204,17 @@ public class CCL4Bond : MouseDrag {
                 draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
 				draggedAtom.GetComponent<CCL4Bond> ().enabled = false;
                 switch (draggedAtom.name) {
-                    case "Hydrogen1":
-				            atomPropertiesScript.hydrogenAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Successful;
+                    case "Chlorine1":
+				            atomPropertiesScript.chlorineAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Successful;
                         break;
-                    case "Hydrogen2":
-			            	atomPropertiesScript.hydrogenAtomStateList[1] = CCL4AtomProperties.AtomBondingState.Successful;
+                    case "Chlorine2":
+			            	atomPropertiesScript.chlorineAtomStateList[1] = CCL4AtomProperties.AtomBondingState.Successful;
                         break;
-                    case "Hydrogen3":
-			            	atomPropertiesScript.hydrogenAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Successful;
+                    case "Chlorine3":
+			            	atomPropertiesScript.chlorineAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Successful;
                         break;
-                    case "Hydrogen4":
-			            	atomPropertiesScript.hydrogenAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Successful;
+                    case "Chlorine4":
+			            	atomPropertiesScript.chlorineAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Successful;
                         break;
                     default:
                         break;
@@ -234,15 +234,15 @@ public class CCL4Bond : MouseDrag {
 
     public void TriggerShellRotation(GameObject collidedAtom, GameObject draggedAtom)
     {
-        collidedAtom.transform.GetChild(2).localEulerAngles = hydrogenShellFacingDown;
-        draggedAtom.transform.GetChild(2).localEulerAngles = hydrogenShellFacingUp;
+        collidedAtom.transform.GetChild(2).localEulerAngles = chlorineShellFacingDown;
+        draggedAtom.transform.GetChild(2).localEulerAngles = chlorineShellFacingUp;
     }
 
 	bool CanDraggedAtomBond() {
 		// Check states for the dragged atom
-		for(int i = 1; i<atomPropertiesScript.hydrogenAtomStateList.Count; i++){
+		for(int i = 1; i<atomPropertiesScript.chlorineAtomStateList.Count; i++){
 			if(i == draggedAtom.name [draggedAtom.name.Length - 1]){
-				if (atomPropertiesScript.hydrogenAtomStateList [i - 1] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[i - 1] == CCL4AtomProperties.AtomBondingState.Failed) {
+				if (atomPropertiesScript.chlorineAtomStateList[i - 1] == CCL4AtomProperties.AtomBondingState.Successful || atomPropertiesScript.chlorineAtomStateList[i - 1] == CCL4AtomProperties.AtomBondingState.Failed) {
 					return false;
 				}
 			}
@@ -252,7 +252,7 @@ public class CCL4Bond : MouseDrag {
 
     public void IsStageBondComplete()
     {
-        if (atomPropertiesScript.hydrogenAtomStateList[0] == CCL4AtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[1] == CCL4AtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[2] == CCL4AtomProperties.AtomBondingState.Successful && atomPropertiesScript.hydrogenAtomStateList[3] == CCL4AtomProperties.AtomBondingState.Successful)
+        if (atomPropertiesScript.chlorineAtomStateList[0] == CCL4AtomProperties.AtomBondingState.Successful && atomPropertiesScript.chlorineAtomStateList[1] == CCL4AtomProperties.AtomBondingState.Successful && atomPropertiesScript.chlorineAtomStateList[2] == CCL4AtomProperties.AtomBondingState.Successful && atomPropertiesScript.chlorineAtomStateList[3] == CCL4AtomProperties.AtomBondingState.Successful)
         {
             if (finisherParticleSystem.activeSelf == false)
             {

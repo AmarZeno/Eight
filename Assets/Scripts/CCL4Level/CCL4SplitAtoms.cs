@@ -8,23 +8,23 @@ using UnityEngine.UI;
 public class CCL4SplitAtoms : MonoBehaviour
 {
 
-    public GameObject hydrogenOne;
-    public GameObject hydrogenTwo;
-    public GameObject hydrogenThree;
-    public GameObject hydrogenFour;
+    public GameObject chlorineOne;
+    public GameObject chlorineTwo;
+    public GameObject chlorineThree;
+    public GameObject chlorineFour;
 
-    public GameObject[] hydrogenList;
+    public GameObject[] chlorineList;
 
     public GameObject carbon;
-    public Vector2 hydrogenOneDefaultLinearOffset;
-    public Vector2 hydrogenTwoDefaultLinearOffset;
-    public Vector2 hydrogenThreeDefaultLinearOffset;
-    public Vector2 hydrogenFourDefaultLinearOffset;
-
-    public Vector3 hydrogenOneDefaultShellEulerValues;
-    public Vector3 hydrogenTwoDefaultShellEulerValues;
-    public Vector3 hydrogenThreeDefaultShellEulerValues;
-    public Vector3 hydrogenFourDefaultShellEulerValues;
+    public Vector2 chlorineOneDefaultLinearOffset;
+    public Vector2 chlorineTwoDefaultLinearOffset;
+    public Vector2 chlorineThreeDefaultLinearOffset;
+    public Vector2 chlorineFourDefaultLinearOffset;
+               
+    public Vector3 chlorineOneDefaultShellEulerValues;
+    public Vector3 chlorineTwoDefaultShellEulerValues;
+    public Vector3 chlorineThreeDefaultShellEulerValues;
+    public Vector3 chlorineFourDefaultShellEulerValues;
 
     // Variables
     public GameObject atomProperties;
@@ -34,18 +34,18 @@ public class CCL4SplitAtoms : MonoBehaviour
     void Start()
     {
         atomPropertiesScript = atomProperties.GetComponent<CCL4AtomProperties>();
-        hydrogenTwo.GetComponent<MouseDrag>().enabled = false;
-        hydrogenFour.GetComponent<MouseDrag>().enabled = false;
+        chlorineTwo.GetComponent<MouseDrag>().enabled = false;
+        chlorineFour.GetComponent<MouseDrag>().enabled = false;
 
-        hydrogenTwoDefaultLinearOffset = hydrogenTwo.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenOneDefaultLinearOffset = hydrogenOne.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenThreeDefaultLinearOffset = hydrogenThree.GetComponent<RelativeJoint2D>().linearOffset;
-        hydrogenFourDefaultLinearOffset = hydrogenFour.GetComponent<RelativeJoint2D>().linearOffset;
-
-        hydrogenOneDefaultShellEulerValues = new Vector3(0, 0, -16);
-        hydrogenTwoDefaultShellEulerValues = new Vector3(0, 0, 182);
-        hydrogenThreeDefaultShellEulerValues = new Vector3(0, 0, 86);
-        hydrogenFourDefaultShellEulerValues = new Vector3(0, 0, 262);
+        chlorineTwoDefaultLinearOffset = chlorineTwo.GetComponent<RelativeJoint2D>().linearOffset;
+        chlorineOneDefaultLinearOffset = chlorineOne.GetComponent<RelativeJoint2D>().linearOffset;
+        chlorineThreeDefaultLinearOffset = chlorineThree.GetComponent<RelativeJoint2D>().linearOffset;
+        chlorineFourDefaultLinearOffset = chlorineFour.GetComponent<RelativeJoint2D>().linearOffset;
+       
+        chlorineOneDefaultShellEulerValues = new Vector3(0, 0, -16);
+        chlorineTwoDefaultShellEulerValues = new Vector3(0, 0, 182);
+        chlorineThreeDefaultShellEulerValues = new Vector3(0, 0, 86);
+        chlorineFourDefaultShellEulerValues = new Vector3(0, 0, 262);
     }
 
     // Update is called once per frame
@@ -66,16 +66,16 @@ public class CCL4SplitAtoms : MonoBehaviour
             {
                 GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
 
-                CCL4AtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
+                CCL4AtomProperties.AtomBondingState state = atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
                 // Prevent splitting for unknown states
                 if (state == CCL4AtomProperties.AtomBondingState.Unknown) {
                     return;
                 }
 
-                if (tappedGameObject.name == "Hydrogen1" || tappedGameObject.name == "Hydrogen2"
-                    || tappedGameObject.name == "Hydrogen3" ||
-                    tappedGameObject.name == "Hydrogen4")
+                if (tappedGameObject.name == "Chlorine1" || tappedGameObject.name == "Chlorine2"
+                    || tappedGameObject.name == "Chlorine3" ||
+                    tappedGameObject.name == "Chlorine4")
                 {
                     if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
                     {
@@ -93,11 +93,11 @@ public class CCL4SplitAtoms : MonoBehaviour
                     {
                         // Check for gameObject that holds joint with the tapped gameobject
                         
-                        foreach (GameObject hydrogen in hydrogenList)
+                        foreach (GameObject chlorine in chlorineList)
                         {
-                            if (hydrogen.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>())
+                            if (chlorine.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>())
                             {
-                                SplitAtom(hydrogen);
+                                SplitAtom(chlorine);
                             }
                         }
                     }
@@ -120,15 +120,15 @@ public class CCL4SplitAtoms : MonoBehaviour
                 {
                     GameObject tappedGameObject = raycastResults[0].gameObject.transform.parent.gameObject;
                     // Prevent splitting for unknown states
-                    CCL4AtomProperties.AtomBondingState state = atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
+                    CCL4AtomProperties.AtomBondingState state = atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)];
 
                     if (state == CCL4AtomProperties.AtomBondingState.Unknown)
                     {
                         return;
                     }
-                    if (tappedGameObject.name == "Hydrogen1" || tappedGameObject.name == "Hydrogen2"
-                        || tappedGameObject.name == "Hydrogen3" ||
-                        tappedGameObject.name == "Hydrogen4")
+                    if (tappedGameObject.name == "Chlorine1" || tappedGameObject.name == "Chlorine2"
+                        || tappedGameObject.name == "Chlorine3" ||
+                        tappedGameObject.name == "Chlorine4")
                     {
 
                         if (tappedGameObject.GetComponent<RelativeJoint2D>().enabled == true)
@@ -146,9 +146,9 @@ public class CCL4SplitAtoms : MonoBehaviour
                         else {
                             // Check for gameObject that holds joint with the tapped gameobject
 
-                            foreach (GameObject hydrogen in hydrogenList) {
-                                if (hydrogen.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>()) {
-                                    SplitAtom(hydrogen);
+                            foreach (GameObject chlorine in chlorineList) {
+                                if (chlorine.GetComponent<RelativeJoint2D>().connectedBody == tappedGameObject.GetComponent<Rigidbody2D>()) {
+                                    SplitAtom(chlorine);
                                 }
                             }
                         }
@@ -188,7 +188,7 @@ public class CCL4SplitAtoms : MonoBehaviour
         tappedGameObject.GetComponent<MouseDrag>().enabled = true;
         tappedGameObject.GetComponent<CCL4Bond>().enabled = true;
         AssociateDefaultPositions(tappedGameObject);
-        atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Unknown;
+        atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Unknown;
     }
 
 
@@ -212,32 +212,32 @@ public class CCL4SplitAtoms : MonoBehaviour
         tappedGameObject.GetComponent<RelativeJoint2D>().connectedBody = carbon.GetComponent<Rigidbody2D>();
         AssociateDefaultPositions(tappedGameObject);
         AssociateDefaultPositions(connectedGameObject);
-        atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Unknown;
+        atomPropertiesScript.chlorineAtomStateList[(Convert.ToInt32(tappedGameObject.name[tappedGameObject.name.Length - 1].ToString()) - 1)] = CCL4AtomProperties.AtomBondingState.Unknown;
     }
 
     void AssociateDefaultPositions(GameObject gameObject) {
-        if (gameObject.name == "Hydrogen1")
+        if (gameObject.name == "Chlorine1")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenOneDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenOneDefaultShellEulerValues;
-            atomPropertiesScript.hydrogenAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Unknown;
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = chlorineOneDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = chlorineOneDefaultShellEulerValues;
+            atomPropertiesScript.chlorineAtomStateList[0] = CCL4AtomProperties.AtomBondingState.Unknown;
         }
-        else if (gameObject.name == "Hydrogen2")
+        else if (gameObject.name == "Chlorine2")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenTwoDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenTwoDefaultShellEulerValues;
-            atomPropertiesScript.hydrogenAtomStateList[1] = CCL4AtomProperties.AtomBondingState.Unknown;
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = chlorineTwoDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = chlorineTwoDefaultShellEulerValues;
+            atomPropertiesScript.chlorineAtomStateList[1] = CCL4AtomProperties.AtomBondingState.Unknown;
         }
-        else if (gameObject.name == "Hydrogen3")
+        else if (gameObject.name == "Chlorine3")
         {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenThreeDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenThreeDefaultShellEulerValues;
-            atomPropertiesScript.hydrogenAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Unknown;
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = chlorineThreeDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = chlorineThreeDefaultShellEulerValues;
+            atomPropertiesScript.chlorineAtomStateList[2] = CCL4AtomProperties.AtomBondingState.Unknown;
         }
-        else if (gameObject.name == "Hydrogen4") {
-            gameObject.GetComponent<RelativeJoint2D>().linearOffset = hydrogenFourDefaultLinearOffset;
-            gameObject.transform.GetChild(2).localEulerAngles = hydrogenFourDefaultShellEulerValues;
-            atomPropertiesScript.hydrogenAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Unknown;
+        else if (gameObject.name == "Chlorine4") {
+            gameObject.GetComponent<RelativeJoint2D>().linearOffset = chlorineFourDefaultLinearOffset;
+            gameObject.transform.GetChild(2).localEulerAngles = chlorineFourDefaultShellEulerValues;
+            atomPropertiesScript.chlorineAtomStateList[3] = CCL4AtomProperties.AtomBondingState.Unknown;
         }
     }
 }
