@@ -25,6 +25,7 @@ public class CCL4Bond : MouseDrag {
     public ParticleSystem[] failureParticleEffects;
 
     public GameObject finisherParticleSystem;
+    public GameObject mainCanvas;
 
     void Start() {
 		atomPropertiesScript = atomProperties.GetComponent<CCL4AtomProperties>();
@@ -258,13 +259,7 @@ public class CCL4Bond : MouseDrag {
             {
                 finisherParticleSystem.SetActive(true);
             }
-            StartCoroutine(ProceedToNextLevel());
+            mainCanvas.GetComponent<EightSceneManager>().StageComplete();
         }
-    }
-
-    IEnumerator ProceedToNextLevel()
-    {
-        yield return new WaitForSeconds(4f);
-       SceneManager.LoadScene(4);
     }
 }
