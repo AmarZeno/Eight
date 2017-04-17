@@ -93,7 +93,7 @@ public class CCL4Bond : MouseDrag {
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[0].Play();
-                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        successParticleEffects[4].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -126,7 +126,7 @@ public class CCL4Bond : MouseDrag {
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[1].Play();
-                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        successParticleEffects[4].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -160,7 +160,7 @@ public class CCL4Bond : MouseDrag {
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[2].Play();
-                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        successParticleEffects[4].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
@@ -194,7 +194,7 @@ public class CCL4Bond : MouseDrag {
 
                         // Trigger success particle effects for the involved atoms
                         successParticleEffects[3].Play();
-                        successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        successParticleEffects[4].Play();
                     }
                     // Enable bonding joint for colliding with any type of atom
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
