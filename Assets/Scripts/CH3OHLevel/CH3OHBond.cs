@@ -49,9 +49,25 @@ public class CH3OHBond : MouseDrag
         {
             case "Hydrogen1":
                 {
-                    // Break if already made a succesful or a failed bond
-                    if (atomPropertiesScript.hydrogenAtomStateList[0] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[0] == CH3OHAtomProperties.AtomBondingState.Failed)
-                        break;
+                    GameObject draggedAtom2 = GetAttachedHydrogenAtom();
+                    if (draggedAtom2 != null) // Holds the break logic to allow carbon/oxygen to pair with hydrogen-hydrogen pair
+                    {
+                        // Break if already made a succesful or a failed bond
+                        if (atomPropertiesScript.hydrogenAtomStateList[0] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[0] == CH3OHAtomProperties.AtomBondingState.Failed)
+                            break;
+                    }
+                    else {
+                        // Perform split and attach only when draggedAtom is oxygen or Hydrogen
+                        if (CanPerformHydrogenSplitAndAttach(collidedAtom))
+                        {
+                            SplitAndAttachHydrogenToOxygenCarbon(draggedAtom, collidedAtom);
+                        }
+                        else {
+                            // Break if already made a succesful or a failed bond
+                            if (atomPropertiesScript.hydrogenAtomStateList[0] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[0] == CH3OHAtomProperties.AtomBondingState.Failed)
+                                break;
+                        }
+                    }
                     if (draggedAtom.name == "Carbon")
                     {
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
@@ -81,9 +97,27 @@ public class CH3OHBond : MouseDrag
                 break;
             case "Hydrogen2":
                 {
-                    // Break if already made a succesful or a failed bond
-                    if (atomPropertiesScript.hydrogenAtomStateList[1] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[1] == CH3OHAtomProperties.AtomBondingState.Failed)
-                        break;
+                    GameObject draggedAtom2 = GetAttachedHydrogenAtom();
+                    if (draggedAtom2 != null) // Holds the break logic to allow carbon/oxygen to pair with hydrogen-hydrogen pair
+                    {
+                        // Break if already made a succesful or a failed bond
+                        if (atomPropertiesScript.hydrogenAtomStateList[1] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[1] == CH3OHAtomProperties.AtomBondingState.Failed)
+                            break;
+                    }
+                    else
+                    {
+                        // Perform split and attach only when draggedAtom is oxygen or Hydrogen
+                        if (CanPerformHydrogenSplitAndAttach(collidedAtom))
+                        {
+                            SplitAndAttachHydrogenToOxygenCarbon(draggedAtom, collidedAtom);
+                        }
+                        else
+                        {
+                            // Break if already made a succesful or a failed bond
+                            if (atomPropertiesScript.hydrogenAtomStateList[1] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[1] == CH3OHAtomProperties.AtomBondingState.Failed)
+                                break;
+                        }
+                    }
                     if (draggedAtom.name == "Carbon")
                     {
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
@@ -115,9 +149,27 @@ public class CH3OHBond : MouseDrag
                 break;
             case "Hydrogen3":
                 {
-                    // Break if already made a succesful or a failed bond
-                    if (atomPropertiesScript.hydrogenAtomStateList[2] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[2] == CH3OHAtomProperties.AtomBondingState.Failed)
-                        break;
+                    GameObject draggedAtom2 = GetAttachedHydrogenAtom();
+                    if (draggedAtom2 != null) // Holds the break logic to allow carbon/oxygen to pair with hydrogen-hydrogen pair
+                    {
+                        // Break if already made a succesful or a failed bond
+                        if (atomPropertiesScript.hydrogenAtomStateList[2] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[2] == CH3OHAtomProperties.AtomBondingState.Failed)
+                            break;
+                    }
+                    else
+                    {
+                        // Perform split and attach only when draggedAtom is oxygen or Hydrogen
+                        if (CanPerformHydrogenSplitAndAttach(collidedAtom))
+                        {
+                            SplitAndAttachHydrogenToOxygenCarbon(draggedAtom, collidedAtom);
+                        }
+                        else
+                        {
+                            // Break if already made a succesful or a failed bond
+                            if (atomPropertiesScript.hydrogenAtomStateList[2] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[2] == CH3OHAtomProperties.AtomBondingState.Failed)
+                                break;
+                        }
+                    }
                     if (draggedAtom.name == "Carbon")
                     {
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
@@ -149,9 +201,27 @@ public class CH3OHBond : MouseDrag
                 break;
             case "Hydrogen4":
                 {
-                    // Break if already made a succesful or a failed bond
-                    if (atomPropertiesScript.hydrogenAtomStateList[3] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == CH3OHAtomProperties.AtomBondingState.Failed)
-                        break;
+                    GameObject draggedAtom2 = GetAttachedHydrogenAtom();
+                    if (draggedAtom2 != null) // Holds the break logic to allow carbon/oxygen to pair with hydrogen-hydrogen pair
+                    {
+                        // Break if already made a succesful or a failed bond
+                        if (atomPropertiesScript.hydrogenAtomStateList[3] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == CH3OHAtomProperties.AtomBondingState.Failed)
+                            break;
+                    }
+                    else
+                    {
+                        // Perform split and attach only when draggedAtom is oxygen or Hydrogen
+                        if (CanPerformHydrogenSplitAndAttach(collidedAtom))
+                        {
+                            SplitAndAttachHydrogenToOxygenCarbon(draggedAtom, collidedAtom);
+                        }
+                        else
+                        {
+                            // Break if already made a succesful or a failed bond
+                            if (atomPropertiesScript.hydrogenAtomStateList[3] == CH3OHAtomProperties.AtomBondingState.Successful || atomPropertiesScript.hydrogenAtomStateList[3] == CH3OHAtomProperties.AtomBondingState.Failed)
+                                break;
+                        }
+                    }
                     if (draggedAtom.name == "Carbon")
                     {
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
@@ -195,6 +265,19 @@ public class CH3OHBond : MouseDrag
                         //Reattach to carbon
                         MakeSuccessfulBond(draggedAtom, atomPropertiesScript.lastBondedHydrogenWithOxygen.gameObject);
                     }
+
+                    if (atomPropertiesScript.carbonSuccessBonds == 4)
+                    {
+                        // Detach and attach the last hydrogen bond
+                        atomPropertiesScript.lastBondedHydrogenWithCarbon.GetComponent<RelativeJoint2D>().enabled = false;
+                        Vector3 localPosition = atomPropertiesScript.lastBondedHydrogenWithCarbon.gameObject.transform.localPosition;
+                        localPosition.x += 100;
+                        atomPropertiesScript.lastBondedHydrogenWithCarbon.gameObject.transform.localPosition = localPosition;
+                        atomPropertiesScript.carbonSuccessBonds -= 1;
+                        //Reattach to oxygen
+                        MakeSuccessfulBond(collidedAtom, atomPropertiesScript.lastBondedHydrogenWithCarbon.gameObject);
+                    }
+
                     // Enable carbon joint
                     draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     atomPropertiesScript.carbonOxygenSuccessBonds += 1;
@@ -202,14 +285,15 @@ public class CH3OHBond : MouseDrag
                 }
                 else
                 {
-                    // Break if first carbon has completed its bonds
-                    if (atomPropertiesScript.oxygenSuccessBonds < 6)
+                    int overAllOxygenBondsIndex = atomPropertiesScript.oxygenSuccessBonds + atomPropertiesScript.carbonOxygenSuccessBonds;
+                    if (overAllOxygenBondsIndex < 6)
                     {
+                        SplitAndAttachSecondDraggedAtom(draggedAtom, collidedAtom);
                         MakeSuccessfulBond(collidedAtom, draggedAtom);
                     }
                     else
                     {
-                        break;
+                        break;// Break if oxygen has completed its bonds
                     }
                     // draggedAtom.GetComponent<LevelFourBond>().enabled = false;
                     // Inverse the params
@@ -229,31 +313,29 @@ public class CH3OHBond : MouseDrag
                         //Reattach to oxygen
                         MakeSuccessfulBond(draggedAtom, atomPropertiesScript.lastBondedHydrogenWithCarbon.gameObject);
                     }
+
+                    if (atomPropertiesScript.oxygenSuccessBonds == 6)
+                    {
+                        // Detach and attach the last hydrogen bond
+                        atomPropertiesScript.lastBondedHydrogenWithOxygen.GetComponent<RelativeJoint2D>().enabled = false;
+                        Vector3 localPosition = atomPropertiesScript.lastBondedHydrogenWithOxygen.gameObject.transform.localPosition;
+                        localPosition.x -= 100;
+                        atomPropertiesScript.lastBondedHydrogenWithOxygen.gameObject.transform.localPosition = localPosition;
+                        atomPropertiesScript.oxygenSuccessBonds -= 1;
+                        //Reattach to carbon
+                        MakeSuccessfulBond(collidedAtom, atomPropertiesScript.lastBondedHydrogenWithOxygen.gameObject);
+                    }
+
                     // Enable carbon joint
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     atomPropertiesScript.carbonOxygenSuccessBonds += 1;
                 }
                 else
                 {
-                    
-                    if (atomPropertiesScript.carbonSuccessBonds < 4)
+                    int overAllCarbonBondsIndex = atomPropertiesScript.carbonSuccessBonds + atomPropertiesScript.carbonOxygenSuccessBonds;
+                    if (overAllCarbonBondsIndex < 4)
                     {
-                        GameObject draggedAtom2 = null;
-                        if (atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] == CH3OHAtomProperties.AtomBondingState.Failed) {
-                            // Find draggedAtom2 if attached is another hydrogen atom
-                            draggedAtom2 = GetAttachedHydrogenAtom(); 
-                            draggedAtom.GetComponent<RelativeJoint2D>().enabled = false;
-                            Vector3 draggedAtomLocalPosition = draggedAtom.gameObject.transform.localPosition;
-                            draggedAtomLocalPosition.y -= 100;
-                            
-                            if (draggedAtom2 != null)
-                            {
-                                draggedAtom2.GetComponent<RelativeJoint2D>().enabled = false;
-                                Vector3 draggedAtom2LocalPosition = draggedAtom2.gameObject.transform.localPosition;
-                                draggedAtom2LocalPosition.y += 100;
-                                MakeSuccessfulBond(collidedAtom, draggedAtom2);
-                            }
-                        }
+                        SplitAndAttachSecondDraggedAtom(draggedAtom, collidedAtom);
                         MakeSuccessfulBond(collidedAtom, draggedAtom);
                     }
                     else {
@@ -379,7 +461,71 @@ public class CH3OHBond : MouseDrag
         }
     }
 
+    void SplitAndAttachSecondDraggedAtom(GameObject draggedAtom, GameObject collidedAtom) {
+        GameObject draggedAtom2 = null;
+        if (atomPropertiesScript.hydrogenAtomStateList[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)] == CH3OHAtomProperties.AtomBondingState.Failed)
+        {
+            // Find draggedAtom2 if attached is another hydrogen atom
+            draggedAtom2 = GetAttachedHydrogenAtom();
+            draggedAtom.GetComponent<RelativeJoint2D>().enabled = false;
+            Vector3 draggedAtomLocalPosition = draggedAtom.gameObject.transform.localPosition;
+            draggedAtomLocalPosition.y -= 100;
+
+            if (draggedAtom2 != null)
+            {
+                draggedAtom2.GetComponent<RelativeJoint2D>().enabled = false;
+                Vector3 draggedAtom2LocalPosition = draggedAtom2.gameObject.transform.localPosition;
+                draggedAtom2LocalPosition.y += 100;
+                MakeSuccessfulBond(collidedAtom, draggedAtom2);
+            }
+        }
+    }
+
+    void SplitAndAttachHydrogenToOxygenCarbon(GameObject draggedAtom, GameObject collidedAtom) {
+        if (draggedAtom.name == "Carbon" || draggedAtom.name == "Oxygen") {
+            GameObject bondedHydrogenAtom2 = null;
+            if (collidedAtom.GetComponent<RelativeJoint2D>().isActiveAndEnabled)
+            {
+                bondedHydrogenAtom2 = collidedAtom.GetComponent<RelativeJoint2D>().gameObject;
+                collidedAtom.GetComponent<RelativeJoint2D>().enabled = false;
+            }
+            else
+            {
+
+                foreach (GameObject hydrogenAtom in atomPropertiesScript.hydrogenAtoms)
+                {
+                    if (hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody != null)
+                    {
+                        if (hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject.name == collidedAtom.name)
+                        {
+                            bondedHydrogenAtom2 = hydrogenAtom;
+                        }
+                    }
+                }
+            }
+            if (bondedHydrogenAtom2 != null)
+            {
+                Vector3 collidedAtomLocalPosition = collidedAtom.gameObject.transform.localPosition;
+                collidedAtomLocalPosition.y += 100;
+                collidedAtom.gameObject.transform.localPosition = collidedAtomLocalPosition;
+
+                bondedHydrogenAtom2.GetComponent<RelativeJoint2D>().enabled = false;
+                Vector3 bondedHydrogen2LocalPosition = bondedHydrogenAtom2.gameObject.transform.localPosition;
+                bondedHydrogen2LocalPosition.y -= 100;
+                bondedHydrogenAtom2.gameObject.transform.localPosition = bondedHydrogen2LocalPosition;
+                MakeSuccessfulBond(draggedAtom, bondedHydrogenAtom2);
+               // MakeSuccessfulBond(draggedAtom, collidedAtom);
+            }
+        }
+    }
+
     public GameObject GetAttachedHydrogenAtom() {
+
+        // Return null for oxygen and carbon dragged atoms. This function is only for hydrogen-hydrogen pairs
+        if (draggedAtom.gameObject.name == "Carbon" || draggedAtom.gameObject.name == "Oxygen") {
+            return null;
+        }
+
         // Returns the hydrogen attached to another hydrogen
         if (draggedAtom.GetComponent<RelativeJoint2D>().isActiveAndEnabled)
         {
@@ -389,14 +535,60 @@ public class CH3OHBond : MouseDrag
         {
             foreach (GameObject hydrogenAtom in atomPropertiesScript.hydrogenAtoms)
             {
-                GameObject test = hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject;
-                if (hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject.name == draggedAtom.name)
+                if (hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody != null)
                 {
-                    return hydrogenAtom;
+                    if (hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject.name == draggedAtom.name)
+                    {
+                        return hydrogenAtom;
+                    }
                 }
             }
         }
         return null;
+    }
+
+    public bool CanPerformHydrogenSplitAndAttach(GameObject collidedAtom) {
+        bool canExecute = true;
+        if (draggedAtom.name == "Carbon" || draggedAtom.name == "Oxygen")
+        {
+            if (collidedAtom.GetComponent<RelativeJoint2D>().isActiveAndEnabled)
+            {
+                if (collidedAtom.GetComponent<RelativeJoint2D>().connectedBody != null)
+                {
+                    if (collidedAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject.name == "Carbon")
+                    {
+                        canExecute = false;
+                    }
+                    else if (collidedAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject.name == "Oxygen")
+                    {
+                        canExecute = false;
+                    }
+                }
+                else
+                {
+                    canExecute = false;
+                }
+            }
+            else {
+                foreach (GameObject hydrogenAtom in atomPropertiesScript.hydrogenAtoms)
+                {
+                    if (hydrogenAtom.GetComponent<RelativeJoint2D>().isActiveAndEnabled)
+                    {
+                        if (hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody != null)
+                        {
+                            if (hydrogenAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject.name == collidedAtom.name) {
+                                canExecute = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            canExecute = false;
+        }
+        return canExecute;
     }
 
     public void IsStageBondComplete()
