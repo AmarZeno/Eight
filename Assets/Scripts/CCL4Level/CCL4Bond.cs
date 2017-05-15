@@ -42,6 +42,12 @@ public class CCL4Bond : MouseDrag {
         draggedAtom = eventData.pointerDrag.gameObject;
     }
 
+    public override void OnEndDrag(PointerEventData eventData)
+    {
+        base.OnEndDrag(eventData);
+        draggedAtom = null;
+    }
+
     void OnTriggerEnter2D(Collider2D other) {
         Bond(other);
     }

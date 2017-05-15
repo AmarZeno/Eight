@@ -359,7 +359,7 @@ public class CH3OHBond : MouseDrag
                 {
                     if (atomPropertiesScript.oxygenSuccessBonds == 6)
                     {
-                        // Detach and attach the last hydrogen bond
+                        // Detach and attach the last hydrogen atom
                         atomPropertiesScript.lastBondedHydrogenWithOxygen.GetComponent<RelativeJoint2D>().enabled = false;
                         Vector3 localPosition = atomPropertiesScript.lastBondedHydrogenWithOxygen.gameObject.transform.localPosition;
                         localPosition.x -= 100;
@@ -371,7 +371,7 @@ public class CH3OHBond : MouseDrag
 
                     if (atomPropertiesScript.carbonSuccessBonds == 4)
                     {
-                        // Detach and attach the last hydrogen bond
+                        // Detach and attach the last hydrogen atom
                         atomPropertiesScript.lastBondedHydrogenWithCarbon.GetComponent<RelativeJoint2D>().enabled = false;
                         Vector3 localPosition = atomPropertiesScript.lastBondedHydrogenWithCarbon.gameObject.transform.localPosition;
                         localPosition.x += 100;
