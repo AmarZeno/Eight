@@ -85,6 +85,11 @@ public class CH3OHBond : MouseDrag
                                 atomPropertiesScript.successParticleEffects[0].Play();
                                 atomPropertiesScript.successParticleEffects[4].Play();
                             }
+                            else
+                            {
+                                atomPropertiesScript.failureParticleEffects[0].Play();
+                                atomPropertiesScript.failureParticleEffects[4].Play();
+                            }
                         }
                         else {
                             break;
@@ -100,6 +105,10 @@ public class CH3OHBond : MouseDrag
                                 // Trigger success particle effects for the involved atoms
                                 atomPropertiesScript.successParticleEffects[0].Play();
                                 atomPropertiesScript.successParticleEffects[5].Play();
+                            }
+                            else {
+                                atomPropertiesScript.failureParticleEffects[0].Play();
+                                atomPropertiesScript.failureParticleEffects[5].Play();
                             }
                         }
                         else
@@ -150,6 +159,11 @@ public class CH3OHBond : MouseDrag
                                 atomPropertiesScript.successParticleEffects[1].Play();
                                 atomPropertiesScript.successParticleEffects[4].Play();
                             }
+                            else
+                            {
+                                atomPropertiesScript.failureParticleEffects[1].Play();
+                                atomPropertiesScript.failureParticleEffects[4].Play();
+                            }
                         }
                         else
                         {
@@ -166,6 +180,11 @@ public class CH3OHBond : MouseDrag
                                 // Trigger success particle effects for the involved atoms
                                 atomPropertiesScript.successParticleEffects[1].Play();
                                 atomPropertiesScript.successParticleEffects[5].Play();
+                            }
+                            else
+                            {
+                                atomPropertiesScript.failureParticleEffects[1].Play();
+                                atomPropertiesScript.failureParticleEffects[5].Play();
                             }
                         }
                         else
@@ -217,6 +236,11 @@ public class CH3OHBond : MouseDrag
                                 atomPropertiesScript.successParticleEffects[2].Play();
                                 atomPropertiesScript.successParticleEffects[4].Play();
                             }
+                            else
+                            {
+                                atomPropertiesScript.failureParticleEffects[2].Play();
+                                atomPropertiesScript.failureParticleEffects[4].Play();
+                            }
                         }
                         else
                         {
@@ -233,6 +257,11 @@ public class CH3OHBond : MouseDrag
                                 // Trigger success particle effects for the involved atoms
                                 atomPropertiesScript.successParticleEffects[2].Play();
                                 atomPropertiesScript.successParticleEffects[5].Play();
+                            }
+                            else
+                            {
+                                atomPropertiesScript.failureParticleEffects[2].Play();
+                                atomPropertiesScript.failureParticleEffects[5].Play();
                             }
                         }
                         else
@@ -283,6 +312,11 @@ public class CH3OHBond : MouseDrag
                                 atomPropertiesScript.successParticleEffects[3].Play();
                                 atomPropertiesScript.successParticleEffects[4].Play();
                             }
+                            else
+                            {
+                                atomPropertiesScript.failureParticleEffects[3].Play();
+                                atomPropertiesScript.failureParticleEffects[4].Play();
+                            }
                         }
                         else
                         {
@@ -299,6 +333,11 @@ public class CH3OHBond : MouseDrag
                                 // Trigger success particle effects for the involved atoms
                                 atomPropertiesScript.successParticleEffects[3].Play();
                                 atomPropertiesScript.successParticleEffects[5].Play();
+                            }
+                            else
+                            {
+                                atomPropertiesScript.failureParticleEffects[3].Play();
+                                atomPropertiesScript.failureParticleEffects[5].Play();
                             }
                         }
                         else
@@ -362,6 +401,10 @@ public class CH3OHBond : MouseDrag
                             atomPropertiesScript.successParticleEffects[5].Play();
                             atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                         }
+                        else {
+                            atomPropertiesScript.failureParticleEffects[5].Play();
+                            atomPropertiesScript.failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        }
                     }
                     else
                     {
@@ -417,6 +460,11 @@ public class CH3OHBond : MouseDrag
                             // Trigger success particle effects for the involved atoms
                             atomPropertiesScript.successParticleEffects[4].Play();
                             atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        }
+                        else
+                        {
+                            atomPropertiesScript.failureParticleEffects[4].Play();
+                            atomPropertiesScript.failureParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                         }
                     }
                     else {
