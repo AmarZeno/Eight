@@ -21,4 +21,13 @@ public class CH3OHAtomProperties : MonoBehaviour {
 
     public Vector3 hydrogenShellFacingDown;
     public Vector3 hydrogenShellFacingUp;
+
+    // Particle effects
+
+    public ParticleSystem[] successParticleEffects;
+    public ParticleSystem[] failureParticleEffects;
+
+    public GameObject finisherParticleSystem1;
+    public GameObject finisherParticleSystem2;
+    public GameObject mainCanvas;
 }

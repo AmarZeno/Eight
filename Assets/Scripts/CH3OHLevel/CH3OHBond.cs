@@ -44,7 +44,13 @@ public class CH3OHBond : MouseDrag
             return;
 
         GameObject collidedAtom = otherAtomCollider.GetComponent<Collider2D>().gameObject;
-
+        // Handle Six collision cases
+        // 1) When the dragged atom collides with Hydrogen1 atom
+        // 2) When the dragged atom collides with Hydrogen2 atom
+        // 3) When the dragged atom collides with Hydrogen3 atom
+        // 4) When the dragged atom collides with Hydrogen4 atom
+        // 5) When the dragged atom collides with Oxygen atom
+        // 6) When the dragged atom collides with Carbon atom
         switch (collidedAtom.name)
         {
             case "Hydrogen1":
@@ -73,6 +79,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.carbonSuccessBonds != 4) // Play only for first 3 success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[0].Play();
+                                atomPropertiesScript.successParticleEffects[4].Play();
+                            }
                         }
                         else {
                             break;
@@ -83,6 +95,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.oxygenSuccessBonds < 6)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.oxygenSuccessBonds != 6) // Play only for first 2 oxygen success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[0].Play();
+                                atomPropertiesScript.successParticleEffects[5].Play();
+                            }
                         }
                         else
                         {
@@ -92,6 +110,9 @@ public class CH3OHBond : MouseDrag
                     else {
                         // For all hydrogen cases
                         MakeHydrogenBonds(draggedAtom, collidedAtom);
+                        // Trigger success particle effects for the involved atoms
+                        atomPropertiesScript.successParticleEffects[0].Play();
+                        atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                 }
                 break;
@@ -123,6 +144,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.carbonSuccessBonds != 4) // Play only for first 3 success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[1].Play();
+                                atomPropertiesScript.successParticleEffects[4].Play();
+                            }
                         }
                         else
                         {
@@ -134,6 +161,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.oxygenSuccessBonds < 6)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.oxygenSuccessBonds != 6) // Play only for first 2 oxygen success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[1].Play();
+                                atomPropertiesScript.successParticleEffects[5].Play();
+                            }
                         }
                         else
                         {
@@ -144,6 +177,9 @@ public class CH3OHBond : MouseDrag
                     {
                         // For all hydrogen cases
                         MakeHydrogenBonds(draggedAtom, collidedAtom);
+                        // Trigger success particle effects for the involved atoms
+                        atomPropertiesScript.successParticleEffects[1].Play();
+                        atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                 }
                 break;
@@ -175,6 +211,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.carbonSuccessBonds != 4) // Play only for first 3 success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[2].Play();
+                                atomPropertiesScript.successParticleEffects[4].Play();
+                            }
                         }
                         else
                         {
@@ -186,6 +228,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.oxygenSuccessBonds < 6)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.oxygenSuccessBonds != 6) // Play only for first 2 oxygen success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[2].Play();
+                                atomPropertiesScript.successParticleEffects[5].Play();
+                            }
                         }
                         else
                         {
@@ -196,6 +244,8 @@ public class CH3OHBond : MouseDrag
                     {
                         // For all hydrogen cases
                         MakeHydrogenBonds(draggedAtom, collidedAtom);
+                        atomPropertiesScript.successParticleEffects[2].Play();
+                        atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                 }
                 break;
@@ -227,6 +277,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.carbonSuccessBonds < 4)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.carbonSuccessBonds != 4) // Play only for first 3 success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[3].Play();
+                                atomPropertiesScript.successParticleEffects[4].Play();
+                            }
                         }
                         else
                         {
@@ -238,6 +294,12 @@ public class CH3OHBond : MouseDrag
                         if (atomPropertiesScript.oxygenSuccessBonds < 6)
                         {
                             MakeSuccessfulBond(draggedAtom, collidedAtom);
+                            if (atomPropertiesScript.oxygenSuccessBonds != 6) // Play only for first 2 oxygen success cases
+                            {
+                                // Trigger success particle effects for the involved atoms
+                                atomPropertiesScript.successParticleEffects[3].Play();
+                                atomPropertiesScript.successParticleEffects[5].Play();
+                            }
                         }
                         else
                         {
@@ -248,6 +310,8 @@ public class CH3OHBond : MouseDrag
                     {
                         // For all hydrogen cases
                         MakeHydrogenBonds(draggedAtom, collidedAtom);
+                        atomPropertiesScript.successParticleEffects[3].Play();
+                        atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
                     }
                 }
                 break;
@@ -281,7 +345,9 @@ public class CH3OHBond : MouseDrag
                     // Enable carbon joint
                     draggedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     atomPropertiesScript.carbonOxygenSuccessBonds += 1;
-                   
+
+                    atomPropertiesScript.successParticleEffects[4].Play();
+                    atomPropertiesScript.successParticleEffects[5].Play();
                 }
                 else
                 {
@@ -290,6 +356,12 @@ public class CH3OHBond : MouseDrag
                     {
                         SplitAndAttachSecondDraggedAtom(draggedAtom, collidedAtom);
                         MakeSuccessfulBond(collidedAtom, draggedAtom);
+                        if (atomPropertiesScript.oxygenSuccessBonds != 6) // Play only for first 2 oxygen success cases
+                        {
+                            // Trigger success particle effects for the involved atoms
+                            atomPropertiesScript.successParticleEffects[5].Play();
+                            atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        }
                     }
                     else
                     {
@@ -329,6 +401,9 @@ public class CH3OHBond : MouseDrag
                     // Enable carbon joint
                     collidedAtom.GetComponent<RelativeJoint2D>().enabled = true;
                     atomPropertiesScript.carbonOxygenSuccessBonds += 1;
+
+                    atomPropertiesScript.successParticleEffects[4].Play();
+                    atomPropertiesScript.successParticleEffects[5].Play();
                 }
                 else
                 {
@@ -337,6 +412,12 @@ public class CH3OHBond : MouseDrag
                     {
                         SplitAndAttachSecondDraggedAtom(draggedAtom, collidedAtom);
                         MakeSuccessfulBond(collidedAtom, draggedAtom);
+                        if (atomPropertiesScript.carbonSuccessBonds != 4) // Play only for first 3 success cases
+                        {
+                            // Trigger success particle effects for the involved atoms
+                            atomPropertiesScript.successParticleEffects[4].Play();
+                            atomPropertiesScript.successParticleEffects[(Convert.ToInt32(draggedAtom.name[draggedAtom.name.Length - 1].ToString()) - 1)].Play();
+                        }
                     }
                     else {
                         break;// Break if first carbon has completed its bonds
@@ -593,5 +674,17 @@ public class CH3OHBond : MouseDrag
 
     public void IsStageBondComplete()
     {
+        if (atomPropertiesScript.carbonSuccessBonds == 3 && atomPropertiesScript.oxygenSuccessBonds == 5 && atomPropertiesScript.carbonOxygenSuccessBonds == 1)
+        {
+            if (atomPropertiesScript.finisherParticleSystem1.activeSelf == false)
+            {
+                atomPropertiesScript.finisherParticleSystem1.SetActive(true);
+            }
+            if (atomPropertiesScript.finisherParticleSystem2.activeSelf == false)
+            {
+                atomPropertiesScript.finisherParticleSystem2.SetActive(true);
+            }
+            atomPropertiesScript.mainCanvas.GetComponent<EightSceneManager>().StageComplete();
+        }
     }
 }
