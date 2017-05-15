@@ -486,7 +486,7 @@ public class CH3OHBond : MouseDrag
             GameObject bondedHydrogenAtom2 = null;
             if (collidedAtom.GetComponent<RelativeJoint2D>().isActiveAndEnabled)
             {
-                bondedHydrogenAtom2 = collidedAtom.GetComponent<RelativeJoint2D>().gameObject;
+                bondedHydrogenAtom2 = collidedAtom.GetComponent<RelativeJoint2D>().connectedBody.gameObject;
                 collidedAtom.GetComponent<RelativeJoint2D>().enabled = false;
             }
             else
