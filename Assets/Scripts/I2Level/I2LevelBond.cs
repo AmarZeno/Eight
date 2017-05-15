@@ -7,7 +7,7 @@ using System;
 public class I2LevelBond : MouseDrag {
 
     // Constants
-    readonly Vector2 iodineAtomLinearOffset = new Vector2(14.5f, 0);
+    readonly Vector2 iodineAtomLinearOffset = new Vector2(13.8f, 0);
 
 	// Variables
 	public GameObject atomProperties;
